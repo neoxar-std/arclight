@@ -1,0 +1,49 @@
+[gd_scene format=3 uid="uid://ci0sk8ao88bpf"]
+
+[ext_resource type="AudioStream" uid="uid://dfbibj2brggpv" path="res://Sounds/MenuMusic.mp3" id="1_3kf3n"]
+[ext_resource type="Script" uid="uid://bgyrvyoxoqi7a" path="res://Scenes/menu.gd" id="1_6pedr"]
+
+[sub_resource type="Environment" id="Environment_lthh4"]
+background_mode = 1
+
+[node name="Menu" type="Node3D" unique_id=717107546]
+script = ExtResource("1_6pedr")
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=2103659641]
+transform = Transform3D(0.7071069, -0.5, 0.50000006, 0, 0.70710677, 0.7071068, -0.7071069, -0.5, 0.50000006, 1, 1, 1)
+environment = SubResource("Environment_lthh4")
+
+[node name="Control" type="Control" parent="Camera3D" unique_id=2103533428]
+custom_maximum_size = Vector2(0, 0)
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Button" type="Button" parent="Camera3D/Control" unique_id=592942184]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -58.5
+offset_top = -16.0
+offset_right = 58.5
+offset_bottom = 16.0
+grow_horizontal = 2
+grow_vertical = 2
+tooltip_text = "lit"
+text = "Play the game"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=2076490996]
+stream = ExtResource("1_3kf3n")
+volume_db = -2.737
+autoplay = true
+parameters/looping = false
+
+[connection signal="pressed" from="Camera3D/Control/Button" to="." method="_on_playbutton"]

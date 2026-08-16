@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://drsrasmqb3sgg"]
+
+[ext_resource type="PackedScene" uid="uid://2oxdgu03lnbk" path="res://addons/character-controller/example/main/player.tscn" id="1_xc1it"]
+
+[node name="Node3D" type="Node3D" unique_id=1744033920]
+
+[node name="Player" parent="." unique_id=92291307 instance=ExtResource("1_xc1it")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+
+[editable path="Player"]
