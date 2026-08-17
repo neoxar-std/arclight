@@ -156,7 +156,7 @@ heightmap_texture = ExtResource("11_aya38")
 uv1_triplanar = true
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_weoig"]
-albedo_color = Color(0.70796657, 0.7079665, 0.7079665, 1)
+albedo_color = Color(0.556953, 0.556953, 0.556953, 1)
 metallic = 1.0
 metallic_texture = ExtResource("2_psv3r")
 metallic_texture_channel = 4
