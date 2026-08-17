@@ -3,6 +3,10 @@
 [ext_resource type="PackedScene" uid="uid://2oxdgu03lnbk" path="res://addons/character-controller/example/main/player.tscn" id="1_xc1it"]
 [ext_resource type="PackedScene" uid="uid://du5qc12ffea3d" path="res://Content/Laser.tscn" id="2_0u16y"]
 [ext_resource type="ArrayMesh" uid="uid://da1xkcro5cb74" path="res://Content/ChamberTest.obj" id="3_pkr1v"]
+[ext_resource type="ArrayMesh" uid="uid://yr3ssnpq4tbs" path="res://Content/ChamberTestLaser.obj" id="4_iit7f"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6ne7p"]
+cull_mode = 2
 
 [node name="Node3D" type="Node3D" unique_id=1744033920]
 
@@ -20,5 +24,9 @@ mesh = ExtResource("3_pkr1v")
 
 [node name="Laser2" parent="." unique_id=925836056 instance=ExtResource("2_0u16y")]
 transform = Transform3D(-1, -8.742278e-08, -3.821371e-15, 0, -4.371139e-08, 1, -8.742278e-08, 1, 4.371139e-08, 0, 1.57361e-06, -42)
+
+[node name="ChamberTestLaser" type="MeshInstance3D" parent="." unique_id=56479921]
+material_override = SubResource("StandardMaterial3D_6ne7p")
+mesh = ExtResource("4_iit7f")
 
 [editable path="Player"]
