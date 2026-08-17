@@ -1,10 +1,20 @@
 [gd_scene format=3 uid="uid://drsrasmqb3sgg"]
 
 [ext_resource type="PackedScene" uid="uid://2oxdgu03lnbk" path="res://addons/character-controller/example/main/player.tscn" id="1_xc1it"]
+[ext_resource type="PackedScene" uid="uid://du5qc12ffea3d" path="res://Content/Laser.tscn" id="2_0u16y"]
 
 [node name="Node3D" type="Node3D" unique_id=1744033920]
 
 [node name="Player" parent="." unique_id=92291307 instance=ExtResource("1_xc1it")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+
+[node name="Laser" parent="." unique_id=331255891 instance=ExtResource("2_0u16y")]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -8, 1.57361e-06, 36)
+
+[node name="Laser2" parent="." unique_id=1024718843 instance=ExtResource("2_0u16y")]
+transform = Transform3D(-1, -8.742278e-08, 0, -3.821371e-15, 4.371139e-08, 1, -8.742278e-08, 1, -4.371139e-08, -7.999998, -1.57361e-06, -36)
+
+[node name="Laser3" parent="." unique_id=642328845 instance=ExtResource("2_0u16y")]
+transform = Transform3D(-4.371139e-08, 1, 0, 4.371139e-08, 3.5527137e-15, 1, 1, 4.3711392e-08, -4.3711385e-08, -44, -2.4158453e-13, -1.57361e-06)
 
 [editable path="Player"]
