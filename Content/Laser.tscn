@@ -10,7 +10,7 @@
 [ext_resource type="ArrayMesh" uid="uid://bo4bp0jk05kvq" path="res://Meshes/Laser/ae.obj" id="5_omgrf"]
 [ext_resource type="ArrayMesh" uid="uid://cmec8vgmwhir4" path="res://Meshes/Laser/af.obj" id="6_ndxjk"]
 [ext_resource type="ArrayMesh" uid="uid://ln6t1lb311ll" path="res://Meshes/Laser/b.obj" id="7_ufcaf"]
-[ext_resource type="Material" uid="uid://c5mnvbkmomhu5" path="res://Materials/Textures/Metal1/Metal049A_1K-JPG.tres" id="8_dv5ua"]
+[ext_resource type="Material" uid="uid://c5mnvbkmomhu5" path="res://Materials/Metal/Light/Metal049A_1K-JPG.tres" id="8_dv5ua"]
 [ext_resource type="ArrayMesh" uid="uid://dh417flwsp6uh" path="res://Meshes/Laser/c.obj" id="8_tnbi0"]
 [ext_resource type="ArrayMesh" uid="uid://bkbjuxo6v8oco" path="res://Meshes/Laser/d.obj" id="9_qoy0d"]
 [ext_resource type="Texture2D" uid="uid://dxe66ghaf5s6i" path="res://Materials/Textures/Metal1/Metal049A_1K-JPG_Color.jpg" id="10_6krir"]
@@ -27,8 +27,37 @@
 [ext_resource type="ArrayMesh" uid="uid://bcd7ro1f574bs" path="res://Meshes/Laser/hr.obj" id="16_dv5ua"]
 [ext_resource type="ArrayMesh" uid="uid://cepvg3tc6lkcj" path="res://Meshes/Laser/mrrw.obj" id="17_6krir"]
 [ext_resource type="ArrayMesh" uid="uid://fkhva80k7t30" path="res://Meshes/Laser/tes.obj" id="18_aya38"]
-[ext_resource type="Material" uid="uid://cc5oobuw0lle8" path="res://Materials/Textures/Metal2/Metal030_1K-JPG.tres" id="18_t54jv"]
+[ext_resource type="Material" uid="uid://cc5oobuw0lle8" path="res://Materials/Metal/Light/Metal030_1K-JPG.tres" id="18_t54jv"]
 [ext_resource type="ArrayMesh" uid="uid://444gb311lbae" path="res://Meshes/Laser/wat.obj" id="19_6hnro"]
+[ext_resource type="Shader" uid="uid://omrf4iqqlidj" path="res://Content/Laser.gdshader" id="30_0fjf0"]
+[ext_resource type="Material" uid="uid://biku5hpq2xd1d" path="res://Materials/Smoke.tres" id="31_psv3r"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_57qmd"]
+render_priority = 0
+shader = ExtResource("30_0fjf0")
+shader_parameter/apply_shape_deform = true
+shader_parameter/top_radius = 0.166000007885
+shader_parameter/bottom_radius = 0.0
+shader_parameter/center_radius = 1.0850000515375
+shader_parameter/center_position = 0.0
+shader_parameter/cylinder_height = 10.0
+shader_parameter/bottom_curve = 4.365
+shader_parameter/_vibrate_amplitude = 0.13
+shader_parameter/_vibrate_frequency = 10.0
+shader_parameter/_speed = 2.925
+shader_parameter/_scale = -0.325
+shader_parameter/color_inner = Color(1.3278385, 1.32158, 1.3256224, 0)
+shader_parameter/color_outer = Color(0.9842686, 0.5489669, 0.97018605, 0.6784314)
+shader_parameter/color_threshold = 0.5290000251275
+shader_parameter/flame_height = -0.01
+shader_parameter/flame_height_offset = -0.8
+shader_parameter/pattern_scale = 14.65
+shader_parameter/use_additional_texture = false
+shader_parameter/texture_scale = 1.125
+shader_parameter/texture_blend = 0.350000016625
+shader_parameter/outline_enabled = false
+shader_parameter/outline_color = Color(0, 0, 0, 1)
+shader_parameter/outline_thickness = 0.04
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_o1568"]
 albedo_color = Color(0.96999544, 0.6552306, 0.42917886, 1)
@@ -231,96 +260,202 @@ heightmap_scale = 1.0
 heightmap_texture = ExtResource("11_aya38")
 uv1_triplanar = true
 
-[node name="Laser" type="Node3D" unique_id=331255891]
+[sub_resource type="SphereMesh" id="SphereMesh_g4v7s"]
+material = ExtResource("31_psv3r")
 
-[node name="A" type="MeshInstance3D" parent="." unique_id=175788228]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -94, 0, 0)
+[sub_resource type="Curve" id="Curve_ibmil"]
+_limits = [-200.0, 200.0, 0.0, 1.0]
+_data = [Vector2(0.010752685, 23.129242), 0.0, 0.0, 0, 0, Vector2(1, -12.244904), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_57qmd"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[node name="Laser" type="Node3D" unique_id=331255891]
+transform = Transform3D(1.405, 0, 0, 0, 1.405, 0, 0, 0, 1.405, 0, 0, 0)
+
+[node name="Shader" type="CSGSphere3D" parent="." unique_id=395532903]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 21.699999, 0)
+visible = false
+radius = 1.1
+radial_segments = 50
+rings = 46
+material = SubResource("ShaderMaterial_57qmd")
+
+[node name="LaserModel" type="Node3D" parent="." unique_id=1821842232]
+
+[node name="A" type="MeshInstance3D" parent="LaserModel" unique_id=175788228]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -93.99999, 0, 0)
 material_override = SubResource("StandardMaterial3D_o1568")
 mesh = ExtResource("1_u44uh")
 
-[node name="Aa" type="MeshInstance3D" parent="." unique_id=527531835]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -94, 0, 0)
+[node name="Aa" type="MeshInstance3D" parent="LaserModel" unique_id=527531835]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -93.99999, 0, 0)
 material_override = SubResource("StandardMaterial3D_ao6uy")
 mesh = SubResource("ArrayMesh_0fjf0")
 
-[node name="Ab" type="MeshInstance3D" parent="." unique_id=2062440192]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -94, 0, 0)
+[node name="Ab" type="MeshInstance3D" parent="LaserModel" unique_id=2062440192]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -93.99999, 0, 0)
 material_override = SubResource("StandardMaterial3D_psv3r")
 mesh = ExtResource("3_43nb5")
 
-[node name="Ac" type="MeshInstance3D" parent="." unique_id=332568424]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -94, 0, 0)
+[node name="Ac" type="MeshInstance3D" parent="LaserModel" unique_id=332568424]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -93.99999, 0, 0)
 material_override = ExtResource("8_dv5ua")
 mesh = ExtResource("4_i64mr")
 
-[node name="Ae" type="MeshInstance3D" parent="." unique_id=599270875]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -94, 0, 0)
+[node name="Ae" type="MeshInstance3D" parent="LaserModel" unique_id=599270875]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -93.99999, 0, 0)
 material_override = SubResource("StandardMaterial3D_enolx")
 mesh = ExtResource("5_omgrf")
 
-[node name="Af" type="MeshInstance3D" parent="." unique_id=1734542743]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -94, 0, 0)
+[node name="Af" type="MeshInstance3D" parent="LaserModel" unique_id=1734542743]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -93.99999, 0, 0)
 mesh = ExtResource("6_ndxjk")
 
-[node name="B" type="MeshInstance3D" parent="." unique_id=1351667699]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -94, 0, 0)
+[node name="B" type="MeshInstance3D" parent="LaserModel" unique_id=1351667699]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -93.99999, 0, 0)
 material_override = SubResource("StandardMaterial3D_hnphx")
 mesh = ExtResource("7_ufcaf")
 
-[node name="C" type="MeshInstance3D" parent="." unique_id=1518487192]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -94, 0, 0)
+[node name="C" type="MeshInstance3D" parent="LaserModel" unique_id=1518487192]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -93.99999, 0, 0)
 material_override = ExtResource("18_t54jv")
 mesh = ExtResource("8_tnbi0")
 
-[node name="D" type="MeshInstance3D" parent="." unique_id=1504872593]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -94, 0, 0)
+[node name="D" type="MeshInstance3D" parent="LaserModel" unique_id=1504872593]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -93.99999, 0, 0)
 material_override = ExtResource("18_t54jv")
 mesh = ExtResource("9_qoy0d")
 
-[node name="E" type="MeshInstance3D" parent="." unique_id=367985118]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -94, 0, 0)
+[node name="E" type="MeshInstance3D" parent="LaserModel" unique_id=367985118]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -93.99999, 0, 0)
 material_override = SubResource("StandardMaterial3D_gnhu5")
 mesh = ExtResource("10_uydqe")
 
-[node name="Ethetbetb" type="MeshInstance3D" parent="." unique_id=111332275]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -94, 0, 0)
+[node name="Ethetbetb" type="MeshInstance3D" parent="LaserModel" unique_id=111332275]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -93.99999, 0, 0)
 material_override = ExtResource("18_t54jv")
 mesh = ExtResource("11_ao6uy")
 
-[node name="F" type="MeshInstance3D" parent="." unique_id=1508597471]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -94, 0, 0)
+[node name="F" type="MeshInstance3D" parent="LaserModel" unique_id=1508597471]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -93.99999, 0, 0)
 material_override = SubResource("StandardMaterial3D_weoig")
 mesh = ExtResource("12_0fjf0")
 
-[node name="Fb" type="MeshInstance3D" parent="." unique_id=313563210]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -94, 0, 0)
+[node name="Fb" type="MeshInstance3D" parent="LaserModel" unique_id=313563210]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -93.99999, 0, 0)
 material_override = SubResource("StandardMaterial3D_x3jpy")
 mesh = ExtResource("13_psv3r")
 
-[node name="G" type="MeshInstance3D" parent="." unique_id=2021039307]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -94, 0, 0)
+[node name="G" type="MeshInstance3D" parent="LaserModel" unique_id=2021039307]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -93.99999, 0, 0)
 mesh = ExtResource("14_10pal")
 
-[node name="Ga" type="MeshInstance3D" parent="." unique_id=269127143]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -94, 0, 0)
+[node name="Ga" type="MeshInstance3D" parent="LaserModel" unique_id=269127143]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -93.99999, 0, 0)
 material_override = ExtResource("18_t54jv")
 mesh = ExtResource("15_jtndc")
 
-[node name="Hr" type="MeshInstance3D" parent="." unique_id=1662757169]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -94, 0, 0)
+[node name="Hr" type="MeshInstance3D" parent="LaserModel" unique_id=1662757169]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -93.99999, 0, 0)
 material_override = SubResource("StandardMaterial3D_hb773")
 mesh = ExtResource("16_dv5ua")
 
-[node name="Mrrw" type="MeshInstance3D" parent="." unique_id=436690807]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -94, 0, 0)
+[node name="Mrrw" type="MeshInstance3D" parent="LaserModel" unique_id=436690807]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -93.99999, 0, 0)
 material_override = SubResource("StandardMaterial3D_0fjf0")
 mesh = ExtResource("17_6krir")
 
-[node name="Tes" type="MeshInstance3D" parent="." unique_id=2023183830]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -94, 0, 0)
+[node name="Tes" type="MeshInstance3D" parent="LaserModel" unique_id=2023183830]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -93.99999, 0, 0)
 material_override = SubResource("StandardMaterial3D_u2pyh")
 mesh = ExtResource("18_aya38")
 
-[node name="Wat" type="MeshInstance3D" parent="." unique_id=1237387640]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -94, 0, 0)
+[node name="Wat" type="MeshInstance3D" parent="LaserModel" unique_id=1237387640]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -93.99999, 0, 0)
 mesh = ExtResource("19_6hnro")
+
+[node name="SteamParticles" type="Node3D" parent="." unique_id=1672556200]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 15.3, 0)
+
+[node name="Holder1" type="Node3D" parent="SteamParticles" unique_id=352927599]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.5)
+
+[node name="CPUParticles3D" type="CPUParticles3D" parent="SteamParticles/Holder1" unique_id=449549492]
+transform = Transform3D(1, 0, 0, 0, 0.9659258, -0.2588191, 0, 0.2588191, 0.9659258, 0, 0, 0)
+emitting = false
+amount = 400
+lifetime = 4.83
+one_shot = true
+explosiveness = 0.08
+randomness = 0.2
+mesh = SubResource("SphereMesh_g4v7s")
+direction = Vector3(0, 0, 0)
+spread = 24.0
+gravity = Vector3(0, 0, 0)
+initial_velocity_max = 4.0
+linear_accel_curve = SubResource("Curve_ibmil")
+scale_amount_min = 0.0
+scale_amount_curve = SubResource("Curve_57qmd")
+
+[node name="Holder2" type="Node3D" parent="SteamParticles" unique_id=1317218794]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, 0, -1.5)
+
+[node name="CPUParticles3D" type="CPUParticles3D" parent="SteamParticles/Holder2" unique_id=134185292]
+transform = Transform3D(1, 0, 0, 0, 0.9659258, -0.2588191, 0, 0.2588191, 0.9659258, 0, 0, 0)
+emitting = false
+amount = 400
+lifetime = 4.83
+one_shot = true
+explosiveness = 0.08
+randomness = 0.2
+mesh = SubResource("SphereMesh_g4v7s")
+direction = Vector3(0, 0, 0)
+spread = 24.0
+gravity = Vector3(0, 0, 0)
+initial_velocity_max = 4.0
+linear_accel_curve = SubResource("Curve_ibmil")
+scale_amount_min = 0.0
+scale_amount_curve = SubResource("Curve_57qmd")
+
+[node name="Holder3" type="Node3D" parent="SteamParticles" unique_id=1652673294]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 1.5, 0, 0)
+
+[node name="CPUParticles3D" type="CPUParticles3D" parent="SteamParticles/Holder3" unique_id=1546497415]
+transform = Transform3D(1, 0, 0, 0, 0.9659258, -0.2588191, 0, 0.2588191, 0.9659258, 0, 0, 0)
+emitting = false
+amount = 400
+lifetime = 4.83
+one_shot = true
+explosiveness = 0.08
+randomness = 0.2
+mesh = SubResource("SphereMesh_g4v7s")
+direction = Vector3(0, 0, 0)
+spread = 24.0
+gravity = Vector3(0, 0, 0)
+initial_velocity_max = 4.0
+linear_accel_curve = SubResource("Curve_ibmil")
+scale_amount_min = 0.0
+scale_amount_curve = SubResource("Curve_57qmd")
+
+[node name="Holder4" type="Node3D" parent="SteamParticles" unique_id=1518986030]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -1.4000001, 0, -9.685755e-08)
+
+[node name="CPUParticles3D" type="CPUParticles3D" parent="SteamParticles/Holder4" unique_id=1059372789]
+transform = Transform3D(1, 0, 0, 0, 0.9659258, -0.2588191, 0, 0.2588191, 0.9659258, 0, 0, 0)
+emitting = false
+amount = 400
+lifetime = 4.83
+one_shot = true
+explosiveness = 0.08
+randomness = 0.2
+mesh = SubResource("SphereMesh_g4v7s")
+direction = Vector3(0, 0, 0)
+spread = 24.0
+gravity = Vector3(0, 0, 0)
+initial_velocity_max = 4.0
+linear_accel_curve = SubResource("Curve_ibmil")
+scale_amount_min = 0.0
+scale_amount_curve = SubResource("Curve_57qmd")

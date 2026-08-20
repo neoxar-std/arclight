@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://bfy5m0inr80cs"]
 
-[ext_resource type="VideoStream" uid="uid://c48ihrgimcikt" path="res://Content/Comp 1.ogv" id="1_3edat"]
+[ext_resource type="VideoStream" uid="uid://bhua77xr24if4" path="res://Content/intro.ogv" id="1_rrrc0"]
 [ext_resource type="Script" uid="uid://cxsjvysw3rguq" path="res://Scenes/video_stream_player.gd" id="2_rrrc0"]
 
 [node name="Intro" type="Control" unique_id=78514577]
@@ -19,7 +19,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-stream = ExtResource("1_3edat")
+stream = ExtResource("1_rrrc0")
 expand = true
 buffering_msec = 200
 script = ExtResource("2_rrrc0")

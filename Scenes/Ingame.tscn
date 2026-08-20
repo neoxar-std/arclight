@@ -2,38 +2,130 @@
 
 [ext_resource type="PackedScene" uid="uid://2oxdgu03lnbk" path="res://addons/character-controller/example/main/player.tscn" id="1_xc1it"]
 [ext_resource type="PackedScene" uid="uid://du5qc12ffea3d" path="res://Content/Laser.tscn" id="2_0u16y"]
-[ext_resource type="ArrayMesh" uid="uid://beg67attlqnj6" path="res://Content/RadiationScrubbers.obj" id="4_c5a3t"]
-[ext_resource type="ArrayMesh" uid="uid://yr3ssnpq4tbs" path="res://Content/ChamberTestLaser.obj" id="4_iit7f"]
-[ext_resource type="ArrayMesh" uid="uid://1vrh5pmbys2b" path="res://Content/NewChamber.obj" id="5_522g6"]
+[ext_resource type="Shader" uid="uid://b5xeh4ub0rcx2" path="res://Scenes/Ingame.gdshader" id="11_38tfy"]
+[ext_resource type="AudioStream" uid="uid://j10pmunjbooj" path="res://Content/reactor.mp3" id="11_lvn6m"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6ne7p"]
-cull_mode = 2
+[sub_resource type="Environment" id="Environment_g4v7s"]
+background_mode = 1
+background_energy_multiplier = 0.0
+ambient_light_source = 2
+ambient_light_color = Color(1, 1, 1, 1)
+ambient_light_energy = 0.25
+ssr_enabled = true
+ssr_max_steps = 32
+ssr_fade_in = 0.5045375
+ssr_fade_out = 0.9330329
+ssr_depth_tolerance = 14.01
+glow_enabled = true
+glow_intensity = 1.1
+glow_strength = 0.36
+glow_bloom = 0.19
+glow_hdr_threshold = 0.66
+volumetric_fog_density = 0.8331
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_f1kyj"]
+[sub_resource type="GDScript" id="GDScript_iit7f"]
+script/source = "extends Node3D
 
-[node name="Node3D" type="Node3D" unique_id=1744033920]
+@export var Test: bool
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	pass
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ho0oi"]
+render_priority = 0
+shader = ExtResource("11_38tfy")
+shader_parameter/wave_amplitude = 0.30000001192093
+shader_parameter/wave_frequency = 20.0
+shader_parameter/wave_speed = 2.9250001389375
+shader_parameter/seamless = true
+shader_parameter/_speed = 1.14
+shader_parameter/_scale = 4.93
+shader_parameter/color_deep = Color(1, 1, 1, 0.8509804)
+shader_parameter/color_shallow = Color(0.92464626, 0.5416211, 0.99725, 1)
+shader_parameter/color_threshold = 0.08400000399
+shader_parameter/outline_enabled = true
+shader_parameter/outline_color = Color(0.95762867, 0.7418881, 1, 1)
+shader_parameter/outline_thickness = 0.0150000007125
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lxlh7"]
+render_priority = 1
+next_pass = SubResource("ShaderMaterial_ho0oi")
+emission_enabled = true
+emission = Color(1, 1, 1, 1)
+emission_energy_multiplier = 11.8
+
+[node name="Ingame" type="Node3D" unique_id=1744033920]
 
 [node name="Player" parent="." unique_id=92291307 instance=ExtResource("1_xc1it")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 49, -3, 0)
+floor_max_angle = 1.553343
 
-[node name="Laser" parent="." unique_id=331255891 instance=ExtResource("2_0u16y")]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 1.57361e-06, 42)
+[node name="Camera3D" type="Camera3D" parent="Player/Head/FirstPersonCameraReference" index="0" unique_id=663682698]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, 0)
+environment = SubResource("Environment_g4v7s")
+fov = 85.4
 
-[node name="Laser3" parent="." unique_id=642328845 instance=ExtResource("2_0u16y")]
-transform = Transform3D(-4.371139e-08, 1, 0, 4.371139e-08, 3.5527137e-15, 1, 1, 4.3711392e-08, -4.3711385e-08, -42, -2.4158453e-13, -1.57361e-06)
+[node name="Player Audios" parent="Player" index="9"]
+transform = Transform3D(0.97020805, -0.24153583, 0.018886998, 0.22444497, 0.86672634, -0.44543228, 0.09121801, 0.4364011, 0.8951164, 0, 0, 0)
 
-[node name="Laser2" parent="." unique_id=925836056 instance=ExtResource("2_0u16y")]
-transform = Transform3D(-1, -8.742278e-08, -3.821371e-15, 0, -4.371139e-08, 1, -8.742278e-08, 1, 4.371139e-08, 0, 1.57361e-06, -42)
+[node name="Game" type="Node3D" parent="." unique_id=980720177]
+script = SubResource("GDScript_iit7f")
 
-[node name="ChamberTestLaser" type="MeshInstance3D" parent="." unique_id=56479921]
-material_override = SubResource("StandardMaterial3D_6ne7p")
-mesh = ExtResource("4_iit7f")
+[node name="Lasers" type="Node3D" parent="Game" unique_id=1580722526]
 
-[node name="RadiationScrubbers" type="MeshInstance3D" parent="." unique_id=1347137043]
-material_override = SubResource("StandardMaterial3D_f1kyj")
-mesh = ExtResource("4_c5a3t")
+[node name="Laser1" parent="Game/Lasers" unique_id=331255891 instance=ExtResource("2_0u16y")]
+transform = Transform3D(1.255, 0, 0, 0, -5.4857793e-08, 1.255, 0, -1.255, -5.4857793e-08, 0, 1.57361e-06, 42)
 
-[node name="NewChamber" type="MeshInstance3D" parent="." unique_id=104724990]
-mesh = ExtResource("5_522g6")
+[node name="Laser3" parent="Game/Lasers" unique_id=642328845 instance=ExtResource("2_0u16y")]
+transform = Transform3D(-5.4639237e-08, 1.25, 5.4639237e-08, 0, -5.4639237e-08, 1.25, 1.25, 5.4639237e-08, 2.3883568e-15, -42, -2.4158453e-13, -1.57361e-06)
+
+[node name="Laser2" parent="Game/Lasers" unique_id=925836056 instance=ExtResource("2_0u16y")]
+transform = Transform3D(-1.25, -1.8874475e-07, -8.250295e-15, 0, -5.4639237e-08, 1.25, -1.8874475e-07, 1.25, 5.4639237e-08, 0, 1.57361e-06, -42)
+
+[node name="Reactor" type="CSGSphere3D" parent="Game" unique_id=1872677768]
+visible = false
+material_override = SubResource("StandardMaterial3D_lxlh7")
+cast_shadow = 0
+radius = 4.0
+radial_segments = 22
+rings = 14
+
+[node name="Sound" type="AudioStreamPlayer3D" parent="Game/Reactor" unique_id=1749277481]
+stream = ExtResource("11_lvn6m")
+attenuation_model = 2
+volume_db = 12.279
+unit_size = 23.86
+max_db = 0.485
+pitch_scale = 0.62
+max_distance = 893.19
+max_polyphony = 11
+panning_strength = 2.1
+parameters/looping = true
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Game/Reactor" unique_id=994669072]
+light_energy = 1.663
+light_indirect_energy = 10.353
+light_volumetric_fog_energy = 4.482
+light_size = 0.225
+light_specular = 4.56
+omni_range = 50.0
+omni_attenuation = 0.343
+omni_shadow_mode = 0
+
+[node name="CSGBox3D" type="CSGBox3D" parent="." unique_id=568150387]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 51, -6, 0)
+use_collision = true
+size = Vector3(17, 1, 29)
+script = SubResource("GDScript_iit7f")
 
 [editable path="Player"]
+[editable path="Game/Lasers/Laser1"]
+[editable path="Game/Lasers/Laser3"]
+[editable path="Game/Lasers/Laser2"]
