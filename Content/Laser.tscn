@@ -272,6 +272,41 @@ point_count = 2
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 2
 
+[sub_resource type="Gradient" id="Gradient_avnxn"]
+colors = PackedColorArray(0, 0, 0, 0, 1, 1, 1, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_33x8s"]
+frequency = 0.0064
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_5s0fj"]
+noise = SubResource("FastNoiseLite_33x8s")
+color_ramp = SubResource("Gradient_avnxn")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_11l65"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_qssos"]
+noise = SubResource("FastNoiseLite_11l65")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7numd"]
+transparency = 1
+albedo_color = Color(0.6936739, 0.46427262, 0.7770714, 1)
+albedo_texture = SubResource("NoiseTexture2D_5s0fj")
+emission_enabled = true
+emission = Color(0.76983315, 0.49092686, 0.78886795, 1)
+emission_energy_multiplier = 3.8
+emission_texture = SubResource("NoiseTexture2D_qssos")
+
+[sub_resource type="SphereMesh" id="SphereMesh_57qmd"]
+material = SubResource("StandardMaterial3D_7numd")
+radius = 1.0
+height = 2.0
+radial_segments = 12
+rings = 12
+
+[sub_resource type="Curve" id="Curve_3gngh"]
+_data = [Vector2(0, 1), 0.0, -5.422741, 0, 0, Vector2(1, 0), -0.0937258, 0.0, 0, 0]
+point_count = 2
+
 [node name="Laser" type="Node3D" unique_id=331255891]
 transform = Transform3D(1.405, 0, 0, 0, 1.405, 0, 0, 0, 1.405, 0, 0, 0)
 
@@ -459,3 +494,24 @@ initial_velocity_max = 4.0
 linear_accel_curve = SubResource("Curve_ibmil")
 scale_amount_min = 0.0
 scale_amount_curve = SubResource("Curve_57qmd")
+
+[node name="StartingParticles" type="Node3D" parent="." unique_id=609478964]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 23, 0)
+
+[node name="Particle" type="CPUParticles3D" parent="StartingParticles" unique_id=1217046026]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.30000007, 0)
+emitting = false
+amount = 1
+lifetime = 6.0
+one_shot = true
+mesh = SubResource("SphereMesh_57qmd")
+gravity = Vector3(0, 0, 0)
+angular_velocity_min = 332.86
+angular_velocity_max = 332.86
+radial_accel_min = 10.05
+radial_accel_max = 31.16
+angle_min = 152.0
+angle_max = 152.0
+scale_amount_min = 11.05
+scale_amount_max = 11.05
+scale_amount_curve = SubResource("Curve_3gngh")

@@ -1,0 +1,69 @@
+[gd_scene format=3 uid="uid://c67hjricfd8sc"]
+
+[ext_resource type="Material" uid="uid://c5mnvbkmomhu5" path="res://Materials/Metal/Light/Metal049A_1K-JPG.tres" id="1_fxvgc"]
+[ext_resource type="ArrayMesh" uid="uid://cnfxslr8c6utk" path="res://Meshes/Button/ButtonBody.obj" id="2_7fptj"]
+[ext_resource type="Material" uid="uid://cc5oobuw0lle8" path="res://Materials/Metal/Light/Metal030_1K-JPG.tres" id="3_opwcm"]
+[ext_resource type="ArrayMesh" uid="uid://b74bbshewcx76" path="res://Meshes/Button/ButtonIdk.obj" id="4_mapl7"]
+[ext_resource type="ArrayMesh" uid="uid://dmn38godyjsub" path="res://Meshes/Button/ButtonMain.obj" id="5_80hrf"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_yf5fn"]
+size = Vector3(1, 0.2, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_57qmd"]
+size = Vector3(0.2, 0.020507813, 0.2)
+
+[sub_resource type="Gradient" id="Gradient_jy262"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_c77op"]
+noise_type = 3
+seed = 223
+frequency = 0.0019
+fractal_type = 3
+fractal_octaves = 10
+fractal_lacunarity = -1.085
+fractal_gain = -1.915
+fractal_weighted_strength = 0.25
+fractal_ping_pong_strength = 1.815
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_53xdg"]
+width = 1024
+height = 1024
+noise = SubResource("FastNoiseLite_c77op")
+color_ramp = SubResource("Gradient_jy262")
+seamless = true
+seamless_blend_skirt = 0.327
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1eko7"]
+depth_draw_mode = 2
+albedo_color = Color(0.3877897, 0.08706283, 0.08569617, 1)
+metallic = 0.64
+metallic_specular = 0.89
+roughness_texture = SubResource("NoiseTexture2D_53xdg")
+roughness_texture_channel = 4
+uv1_triplanar = true
+
+[node name="Button" type="StaticBody3D" unique_id=1690557776]
+
+[node name="ButtonBody" type="MeshInstance3D" parent="." unique_id=1590388051]
+material_override = ExtResource("1_fxvgc")
+mesh = ExtResource("2_7fptj")
+
+[node name="ButtonIdk" type="MeshInstance3D" parent="." unique_id=516748163]
+material_override = ExtResource("3_opwcm")
+mesh = ExtResource("4_mapl7")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1467159844]
+transform = Transform3D(0.35, 0, 0, 0, 0.35, 0, 0, 0, 0.35, 0, -0.034999996, 0)
+shape = SubResource("BoxShape3D_yf5fn")
+
+[node name="ButtonMain2" type="StaticBody3D" parent="." unique_id=2034754198 groups=["Buttons"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.01840306, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ButtonMain2" unique_id=798802052]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.9802322e-08, 0.010253899, 2.9802322e-08)
+shape = SubResource("BoxShape3D_57qmd")
+
+[node name="ButtonMain" type="MeshInstance3D" parent="ButtonMain2" unique_id=932477104]
+transform = Transform3D(1.05, 0, 0, 0, 1.05, 0, 0, 0, 1.05, 0.010619063, -0.02208225, -0.011658028)
+material_override = SubResource("StandardMaterial3D_1eko7")
+mesh = ExtResource("5_80hrf")

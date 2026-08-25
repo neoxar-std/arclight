@@ -2,6 +2,8 @@
 
 [ext_resource type="PackedScene" uid="uid://2oxdgu03lnbk" path="res://addons/character-controller/example/main/player.tscn" id="1_xc1it"]
 [ext_resource type="PackedScene" uid="uid://du5qc12ffea3d" path="res://Content/Laser.tscn" id="2_0u16y"]
+[ext_resource type="PackedScene" uid="uid://c67hjricfd8sc" path="res://Content/Button.tscn" id="5_c5a3t"]
+[ext_resource type="PackedScene" uid="uid://osjv8v3yimip" path="res://Content/Desk.tscn" id="6_522g6"]
 [ext_resource type="Shader" uid="uid://b5xeh4ub0rcx2" path="res://Scenes/Ingame.gdshader" id="11_38tfy"]
 [ext_resource type="AudioStream" uid="uid://j10pmunjbooj" path="res://Content/reactor.mp3" id="11_lvn6m"]
 
@@ -11,11 +13,14 @@ background_energy_multiplier = 0.0
 ambient_light_source = 2
 ambient_light_color = Color(1, 1, 1, 1)
 ambient_light_energy = 0.25
-ssr_enabled = true
 ssr_max_steps = 32
 ssr_fade_in = 0.5045375
 ssr_fade_out = 0.9330329
 ssr_depth_tolerance = 14.01
+ssao_enabled = true
+ssao_radius = 0.75
+ssao_intensity = 2.57
+ssao_detail = 0.86
 glow_enabled = true
 glow_intensity = 1.1
 glow_strength = 0.36
@@ -26,15 +31,173 @@ volumetric_fog_density = 0.8331
 [sub_resource type="GDScript" id="GDScript_iit7f"]
 script/source = "extends Node3D
 
-@export var Test: bool
+@export var ReactorTemp: float
+@export var ReactorChamberPressure: float
+@export var Laser1Power: float = 25
+@export var Laser2Power: float = 25
+@export var Laser3Power: float = 25
+@export var Laser1Pressure: float = 0
+@export var Laser2Pressure: float = 0
+@export var Laser3Pressure: float = 0
+@export var Coolant1Power: float = 25
+@export var Coolant2Power: float = 25
+@export var Coolant3Power: float = 25
+@export var CoolantStability: float = 100
+@export var Camera: Camera3D
+@export var MainControlRoomScreenViewport: SubViewport
+@export var ReactorStarted: bool = false
+@export var ReactorStarting: bool = false
+@export var ReactorVisible: bool = false
 
-# Called when the node enters the scene tree for the first time.
+@onready var Reactor = $Reactor
+@onready var ReactorSound = $Reactor/Sound
+@onready var Lasers = $Lasers
+@onready var Laser1 = $Lasers/Laser1
+@onready var Laser2 = $Lasers/Laser2
+@onready var Laser3 = $Lasers/Laser3
+@onready var CameraEnvironment: Environment = Camera.environment
+
+var ButtonGroupName = \"Buttons\"
+var ButtonDebounces = []
+var activeOSTs = []
+
+func quickCreateSound(parent: Node3D, resource: String, volumeDB: int):
+	var sound := AudioStreamPlayer.new()
+	sound.stream = load(resource)
+	sound.volume_db = volumeDB
+	parent.add_child(sound)
+	sound.play()
+
+func clearAllActiveOSTs():
+	for activeOST in activeOSTs:
+		activeOST.queue_free()
+		activeOSTs.erase(activeOST)
+		
+func playOST(resource: String, volume: int):
+	var sound := AudioStreamPlayer.new()
+	sound.stream = load(resource)
+	sound.volume_db = volume
+	add_child(sound)
+	sound.play()
+	activeOSTs.append(sound)
+	return sound
+
+func button_startup():
+	if ReactorStarting or ReactorStarted:
+		return
+	ReactorStarting = true
+	clearAllActiveOSTs()
+	var StartupOST = playOST(\"res://Content/startup.mp3\", -12)
+	get_tree().create_timer(27 - 7).timeout.connect(func(): 
+		for Laser in Lasers.get_children():
+			for Holder in Laser.get_node(\"SteamParticles\").get_children():
+				var CPUParticles = Holder.get_node(\"CPUParticles3D\")
+				if CPUParticles:
+					CPUParticles.emitting = true
+	)
+	await get_tree().create_timer(27).timeout
+	quickCreateSound(Reactor, \"res://Content/exp2.mp3\", -6)
+	quickCreateSound(Reactor, \"res://Content/rcamb.mp3\", -7)
+	get_tree().create_timer(19.4 - 1.5).timeout.connect(func(): 
+		for Laser in Lasers.get_children():
+			var StartingParticles = Laser.get_node(\"StartingParticles\")
+			if StartingParticles:
+				var Particle = StartingParticles.get_node(\"Particle\")
+				if Particle:
+					Particle.emitting = true
+	)
+	await get_tree().create_timer(19.4).timeout
+	quickCreateSound(Reactor, \"res://Content/exp1.mp3\", -2)
+	quickCreateSound(Reactor, \"res://Content/exp3.mp3\", 0)
+	get_tree().create_timer(20).timeout.connect(func(): get_tree().create_tween().tween_property(StartupOST, \"volume_db\", -120, 20))
+	var NewTween = get_tree().create_tween()
+	CameraEnvironment.tonemap_exposure = 500
+	NewTween.tween_property(CameraEnvironment, \"tonemap_exposure\", 1, 5).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
+	ReactorTemp = 6000
+	ReactorStarted = true
+	ReactorStarting = false
+
+func can_press_button(button: Node3D):
+	if !button.is_in_group(ButtonGroupName):
+		return false
+	if ButtonDebounces.find(button) != -1:
+		return false
+	return true
+
+func button_press_animation(button: Node3D):
+	if !can_press_button(button):
+		return false
+	ButtonDebounces.append(button)
+	var currentPosition = button.position
+	var newPosition = currentPosition + Vector3(0, -0.025, 0)
+	var tween = get_tree().create_tween()
+	var sound := AudioStreamPlayer.new()
+	sound.stream = preload(\"res://Content/btn.mp3\")
+	button.add_child(sound)
+	sound.play()
+	tween.tween_property(button, \"position\", newPosition, 0.03).set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_OUT)
+	tween.tween_property(button, \"position\", currentPosition, 0.4).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN_OUT)
+	await tween.finished
+	sound.queue_free()
+	ButtonDebounces.erase(button)
+	return true
+
+func _input(event: InputEvent) -> void:
+	if event is InputEventMouseButton and event.pressed and event.button_index == 1:
+		var from = Camera.project_ray_origin(event.position)
+		var to = from + Camera.project_ray_normal(event.position) * 7
+		var space_state = get_world_3d().direct_space_state
+		var query = PhysicsRayQueryParameters3D.create(from, to)
+		var result = space_state.intersect_ray(query)
+		if result:
+			var clicked_object = result.collider
+			if clicked_object.is_in_group(ButtonGroupName):
+				if can_press_button(clicked_object):
+					var ParentObject = clicked_object.get_parent()
+					if ParentObject.name == \"buttonTest\":
+						call_deferred(&\"button_startup\")
+					elif ParentObject.name == \"buttonTest2\":
+						clearAllActiveOSTs()
+						playOST(\"res://Content/troll.mp3\", -12)
+				button_press_animation(clicked_object)
+	pass
+
 func _ready() -> void:
-	pass # Replace with function body.
+	if !CameraEnvironment:
+		push_warning(\"Missing camera environment, this will lead to errors\")
+	pass
+	
+func updateReactorVisibility():
+	if ReactorVisible != ReactorStarted:
+		ReactorVisible = ReactorStarted
+		Reactor.visible = ReactorStarted
+		Reactor.get_node(\"OmniLight3D\").visible = ReactorStarted
+		Laser1.get_node(\"Shader\").visible = ReactorStarted
+		Laser2.get_node(\"Shader\").visible = ReactorStarted
+		Laser3.get_node(\"Shader\").visible = ReactorStarted
 
+func updateViewportScreens():
+	MainControlRoomScreenViewport.get_node(\"Control\").get_node(\"Label\").text = \"Temp: \" + str(ReactorTemp)
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	if ReactorStarted:
+		CoolantStability = clamp(CoolantStability - (((Coolant1Power + Coolant2Power + Coolant3Power) / 100) * delta), 0, 100)
+		if Laser1Pressure <= 2500:
+			ReactorTemp += ((Laser1Power / 25) + 2) * delta
+			if Laser1Power > 20:
+				Laser1Pressure += (clamp(abs(20 - Laser1Power) / 10, 0, 75) * 25) * delta
+		if Laser2Pressure <= 2500:
+			ReactorTemp += ((Laser2Power / 25) + 2) * delta
+			if Laser2Power > 20:
+				Laser2Pressure += (clamp(abs(20 - Laser2Power) / 10, 0, 75) * 25) * delta
+		if Laser3Pressure <= 2500:
+			ReactorTemp += ((Laser3Power / 25) + 2) * delta
+			if Laser3Power > 20:
+				Laser3Pressure += (clamp(abs(20 - Laser3Power) / 10, 0, 75) * 25) * delta
+		ReactorTemp -= ((Coolant1Power + Coolant2Power + Coolant3Power) / 80) * delta
+		Reactor.rotate(Vector3(0, 1, 0), deg_to_rad(clamp((ReactorTemp / 12000) * 30, 1, 30)));
+	updateReactorVisibility()
+	updateViewportScreens()
 	pass
 "
 
@@ -61,22 +224,43 @@ emission_enabled = true
 emission = Color(1, 1, 1, 1)
 emission_energy_multiplier = 11.8
 
+[sub_resource type="ViewportTexture" id="ViewportTexture_n56hh"]
+viewport_path = NodePath("Test/SubViewport")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_c5a3t"]
+resource_local_to_scene = true
+albedo_texture = SubResource("ViewportTexture_n56hh")
+uv1_scale = Vector3(1, -1, -1)
+
+[sub_resource type="SystemFont" id="SystemFont_yf5fn"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_g4v7s"]
+font = SubResource("SystemFont_yf5fn")
+font_size = 34
+
 [node name="Ingame" type="Node3D" unique_id=1744033920]
 
 [node name="Player" parent="." unique_id=92291307 instance=ExtResource("1_xc1it")]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 49, -3, 0)
 floor_max_angle = 1.553343
 
+[node name="Head" parent="Player" index="8"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6399999, 0)
+
+[node name="FirstPersonCameraReference" parent="Player/Head" index="1"]
+gizmo_extents = 0.45
+
 [node name="Camera3D" type="Camera3D" parent="Player/Head/FirstPersonCameraReference" index="0" unique_id=663682698]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, 0)
 environment = SubResource("Environment_g4v7s")
 fov = 85.4
 
 [node name="Player Audios" parent="Player" index="9"]
 transform = Transform3D(0.97020805, -0.24153583, 0.018886998, 0.22444497, 0.86672634, -0.44543228, 0.09121801, 0.4364011, 0.8951164, 0, 0, 0)
 
-[node name="Game" type="Node3D" parent="." unique_id=980720177]
+[node name="Game" type="Node3D" parent="." unique_id=980720177 node_paths=PackedStringArray("Camera", "MainControlRoomScreenViewport")]
 script = SubResource("GDScript_iit7f")
+Camera = NodePath("../Player/Head/FirstPersonCameraReference/Camera3D")
+MainControlRoomScreenViewport = NodePath("../Test/SubViewport")
 
 [node name="Lasers" type="Node3D" parent="Game" unique_id=1580722526]
 
@@ -110,6 +294,7 @@ panning_strength = 2.1
 parameters/looping = true
 
 [node name="OmniLight3D" type="OmniLight3D" parent="Game/Reactor" unique_id=994669072]
+visible = false
 light_energy = 1.663
 light_indirect_energy = 10.353
 light_volumetric_fog_energy = 4.482
@@ -119,11 +304,66 @@ omni_range = 50.0
 omni_attenuation = 0.343
 omni_shadow_mode = 0
 
-[node name="CSGBox3D" type="CSGBox3D" parent="." unique_id=568150387]
+[node name="hjisdfvg" type="CSGBox3D" parent="." unique_id=568150387]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 51, -6, 0)
 use_collision = true
 size = Vector3(17, 1, 29)
-script = SubResource("GDScript_iit7f")
+
+[node name="Test" type="CSGBox3D" parent="." unique_id=1440505237]
+transform = Transform3D(-4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0, 1, 46, -3.5, -0.6)
+size = Vector3(1.1, 0.1, 2.2)
+material = SubResource("StandardMaterial3D_c5a3t")
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="Test" unique_id=449536471]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="SubViewport" type="SubViewport" parent="Test" unique_id=191051565]
+screen_space_aa = 1
+gui_disable_input = true
+size = Vector2i(1000, 500)
+
+[node name="Control" type="Control" parent="Test/SubViewport" unique_id=1254540627]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="Test/SubViewport/Control" unique_id=196831753]
+layout_mode = 1
+offset_right = 130.0
+offset_bottom = 47.0
+text = "Temp: 0"
+label_settings = SubResource("LabelSettings_g4v7s")
+
+[node name="Label2" type="Label" parent="Test/SubViewport/Control" unique_id=2067118947]
+layout_mode = 1
+offset_left = 6.0
+offset_top = 53.0
+offset_right = 136.0
+offset_bottom = 100.0
+text = "shii debug coolant: 60000000000000000000%"
+label_settings = SubResource("LabelSettings_g4v7s")
+
+[node name="Label3" type="Label" parent="Test/SubViewport/Control" unique_id=1603605806]
+layout_mode = 1
+offset_left = 4.0
+offset_top = 108.0
+offset_right = 740.0
+offset_bottom = 155.0
+text = "uhhh some variable"
+label_settings = SubResource("LabelSettings_g4v7s")
+
+[node name="buttonTest" parent="." unique_id=796667830 instance=ExtResource("5_c5a3t")]
+transform = Transform3D(0.9911697, 0.1325996, 0, -0.1325996, 0.9911697, 0, 0, 0, 1, 47.066074, -4.3207393, 3.9492333)
+
+[node name="buttonTest2" parent="." unique_id=561695665 instance=ExtResource("5_c5a3t")]
+transform = Transform3D(0.9912155, 0.13225639, 0, -0.13225639, 0.9912155, 0, 0, 0, 1, 46.571114, -4.242774, 3.9685504)
+
+[node name="Desk" parent="." unique_id=61415885 instance=ExtResource("6_522g6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 46.8, -5, 1)
 
 [editable path="Player"]
 [editable path="Game/Lasers/Laser1"]
