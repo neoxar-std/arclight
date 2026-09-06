@@ -18,6 +18,7 @@
 [ext_resource type="ArrayMesh" uid="uid://dfxb6rfn7mvap" path="res://Meshes/Chamber/Details2.obj" id="14_unnhd"]
 [ext_resource type="Material" uid="uid://c5t6tuuvwa1mh" path="res://Materials/Textures/Concrete1/Concrete034_2K-JPG.tres" id="16_707sx"]
 [ext_resource type="Texture2D" uid="uid://dxe66ghaf5s6i" path="res://Materials/Textures/Metal1/Metal049A_1K-JPG_Color.jpg" id="18_h8enb"]
+[ext_resource type="Material" uid="uid://c5mnvbkmomhu5" path="res://Materials/Metal/Light/Metal049A_1K-JPG.tres" id="18_lj3qd"]
 [ext_resource type="Texture2D" uid="uid://yt7nidv00i62" path="res://Materials/Textures/Metal1/Metal049A_1K-JPG_Displacement.jpg" id="19_gbvyf"]
 [ext_resource type="ArrayMesh" uid="uid://cnpjukcaml0an" path="res://Meshes/Chamber/Lights.obj" id="19_nyvdq"]
 [ext_resource type="Texture2D" uid="uid://cjf78x7wn0yb2" path="res://Materials/Textures/Metal2/Metal030_1K-JPG_Displacement.jpg" id="20_4l12f"]
@@ -28,6 +29,7 @@
 [ext_resource type="Texture2D" uid="uid://ic3vtpj5wwl0" path="res://Materials/Textures/Metal1/Metal049A_1K-JPG_Roughness.jpg" id="22_lj3qd"]
 [ext_resource type="Texture2D" uid="uid://ce67wu6n8n6f8" path="res://Materials/Textures/Metal2/Metal030_1K-JPG_Roughness.jpg" id="23_6lmw8"]
 [ext_resource type="ArrayMesh" uid="uid://b2ur6nr3l1ebq" path="res://Meshes/Chamber/PipeHolders.obj" id="24_24bma"]
+[ext_resource type="PackedScene" uid="uid://bf7fvih8y83au" path="res://Content/Lever.tscn" id="25_5np2d"]
 [ext_resource type="ArrayMesh" uid="uid://b3exi4fpqrosd" path="res://Meshes/ReactorControl/Ceiling.obj" id="25_gxa5y"]
 [ext_resource type="ArrayMesh" uid="uid://b5qn8en1ac5hr" path="res://Meshes/ReactorControl/Floor.obj" id="28_0yrm8"]
 [ext_resource type="ArrayMesh" uid="uid://c3g3ndnhr6pvt" path="res://Meshes/ReactorControl/Screens.obj" id="29_wxeai"]
@@ -416,11 +418,6 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_15axq")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wyy0n"]
-emission_enabled = true
-emission = Color(1, 1, 1, 1)
-emission_energy_multiplier = 16.0
-
 [sub_resource type="Gradient" id="Gradient_q5gs5"]
 colors = PackedColorArray(0.76240367, 0.76240367, 0.76240367, 1, 1, 1, 1, 1)
 
@@ -684,12 +681,15 @@ material_override = SubResource("StandardMaterial3D_d7lrx")
 mesh = SubResource("ArrayMesh_ysm5i")
 
 [node name="Lights" type="MeshInstance3D" parent="Game/Chamber" unique_id=2115222461]
-material_override = SubResource("StandardMaterial3D_wyy0n")
+material_override = ExtResource("18_lj3qd")
 mesh = ExtResource("19_nyvdq")
 
 [node name="PipeHolders" type="MeshInstance3D" parent="Game/Chamber" unique_id=1829753719]
 material_override = SubResource("StandardMaterial3D_yulqq")
 mesh = ExtResource("24_24bma")
+
+[node name="Lever" parent="Game/Chamber" unique_id=49626549 instance=ExtResource("25_5np2d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 49, -1, 3)
 
 [node name="ControlRoom" type="Node3D" parent="Game" unique_id=1903872104]
 

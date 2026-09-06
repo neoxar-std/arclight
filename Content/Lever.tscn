@@ -1,0 +1,44 @@
+[gd_scene format=3 uid="uid://bf7fvih8y83au"]
+
+[ext_resource type="Material" uid="uid://cc5oobuw0lle8" path="res://Materials/Metal/Light/Metal030_1K-JPG.tres" id="1_h3jsm"]
+[ext_resource type="ArrayMesh" uid="uid://d2si6mor0t0s3" path="res://Meshes/Lever/Body.obj" id="2_vpd0n"]
+[ext_resource type="Texture2D" uid="uid://cjf78x7wn0yb2" path="res://Materials/Textures/Metal2/Metal030_1K-JPG_Displacement.jpg" id="3_444ex"]
+[ext_resource type="Texture2D" uid="uid://vy6y7i5kcnhd" path="res://Materials/Textures/Metal2/Metal030_1K-JPG_Metalness.jpg" id="4_sopbo"]
+[ext_resource type="Texture2D" uid="uid://bpravndam4780" path="res://Materials/Textures/Metal2/Metal030_1K-JPG_NormalGL.jpg" id="5_wsk81"]
+[ext_resource type="Texture2D" uid="uid://ce67wu6n8n6f8" path="res://Materials/Textures/Metal2/Metal030_1K-JPG_Roughness.jpg" id="6_esbld"]
+[ext_resource type="ArrayMesh" uid="uid://kvcnkpe7gypr" path="res://Meshes/Lever/Det2.obj" id="7_2c565"]
+[ext_resource type="ArrayMesh" uid="uid://cq2wmm4laj708" path="res://Meshes/Lever/Lever.obj" id="8_s7ymp"]
+[ext_resource type="Material" uid="uid://c5t6tuuvwa1mh" path="res://Materials/Textures/Concrete1/Concrete034_2K-JPG.tres" id="9_b042x"]
+[ext_resource type="ArrayMesh" uid="uid://wllm5v0rvqmu" path="res://Meshes/Lever/Screws.obj" id="10_83pmc"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vrxke"]
+albedo_color = Color(0.8361586, 0.48516637, 0.17539465, 1)
+metallic = 0.15
+metallic_specular = 0.0
+metallic_texture = ExtResource("4_sopbo")
+metallic_texture_channel = 4
+roughness_texture = ExtResource("6_esbld")
+roughness_texture_channel = 4
+normal_enabled = true
+normal_texture = ExtResource("5_wsk81")
+heightmap_scale = 1.0
+heightmap_texture = ExtResource("3_444ex")
+uv1_triplanar = true
+uv1_triplanar_sharpness = 6.7271657
+
+[node name="Lever" type="Node3D" unique_id=49626549]
+
+[node name="Body" type="MeshInstance3D" parent="." unique_id=2130727890]
+material_override = ExtResource("1_h3jsm")
+mesh = ExtResource("2_vpd0n")
+
+[node name="Det2" type="MeshInstance3D" parent="." unique_id=431973147]
+material_override = SubResource("StandardMaterial3D_vrxke")
+mesh = ExtResource("7_2c565")
+
+[node name="Lever" type="MeshInstance3D" parent="." unique_id=1786135053]
+mesh = ExtResource("8_s7ymp")
+
+[node name="Screws" type="MeshInstance3D" parent="." unique_id=2038171267]
+material_override = ExtResource("9_b042x")
+mesh = ExtResource("10_83pmc")
