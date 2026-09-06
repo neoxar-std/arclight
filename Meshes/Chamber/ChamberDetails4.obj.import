@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://kcodkji7f782"
+path="res://.godot/imported/ChamberDetails4.obj-7e02fa4f7a10ae1876e015c474bd1746.mesh"
+
+[deps]
+
+files=["res://.godot/imported/ChamberDetails4.obj-7e02fa4f7a10ae1876e015c474bd1746.mesh"]
+
+source_file="res://Meshes/Chamber/ChamberDetails4.obj"
+dest_files=["res://.godot/imported/ChamberDetails4.obj-7e02fa4f7a10ae1876e015c474bd1746.mesh", "res://.godot/imported/ChamberDetails4.obj-7e02fa4f7a10ae1876e015c474bd1746.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

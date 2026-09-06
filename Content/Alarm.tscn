@@ -1,0 +1,114 @@
+[gd_scene format=3 uid="uid://cx120bblpc2rm"]
+
+[ext_resource type="Material" uid="uid://c5mnvbkmomhu5" path="res://Materials/Metal/Light/Metal049A_1K-JPG.tres" id="1_504iq"]
+[ext_resource type="ArrayMesh" uid="uid://nax72gkhh627" path="res://Meshes/Alarm/AlarmMain.obj" id="2_k8q8g"]
+[ext_resource type="Texture2D" uid="uid://bge0ie2n3l1g4" path="res://Materials/Textures/Concrete1/Concrete034_2K-JPG_Color.jpg" id="3_65xlr"]
+[ext_resource type="Shader" uid="uid://cyis7alwhjvlw" path="res://Materials/Neon.gdshader" id="3_504iq"]
+[ext_resource type="Texture2D" uid="uid://dyt77uqd2epaw" path="res://Materials/Textures/Concrete1/Concrete034_2K-JPG_Displacement.jpg" id="4_j0xsk"]
+[ext_resource type="Texture2D" uid="uid://mkn1l8lchi0a" path="res://Materials/Textures/Concrete1/Concrete034_2K-JPG_NormalGL.jpg" id="5_wq3ue"]
+[ext_resource type="Texture2D" uid="uid://dw37ygb1umpo2" path="res://Materials/Textures/Concrete1/Concrete034_2K-JPG_Roughness.jpg" id="6_uc5ns"]
+[ext_resource type="ArrayMesh" uid="uid://dunjtfqgtynsy" path="res://Meshes/Alarm/Body.obj" id="7_xjwi3"]
+[ext_resource type="ArrayMesh" uid="uid://6kqbi5cgelef" path="res://Meshes/Alarm/Detail.obj" id="8_06asu"]
+[ext_resource type="Material" uid="uid://6p2kuxccsune" path="res://Materials/Glass.tres" id="9_2pevr"]
+[ext_resource type="ArrayMesh" uid="uid://y7x8rvw10xwm" path="res://Meshes/Alarm/Glass.obj" id="10_jntmf"]
+[ext_resource type="ArrayMesh" uid="uid://c33necqj6g8jc" path="res://Meshes/Alarm/Neon.obj" id="12_fg5o3"]
+[ext_resource type="Material" uid="uid://cc5oobuw0lle8" path="res://Materials/Metal/Light/Metal030_1K-JPG.tres" id="13_g0ltq"]
+[ext_resource type="ArrayMesh" uid="uid://b4nnawainbnpm" path="res://Meshes/Alarm/Rotatio.obj" id="14_sg6jq"]
+[ext_resource type="AudioStream" uid="uid://bf7b5w41ehvu" path="res://Content/alarm loop.mp3" id="15_k8q8g"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_fjt70"]
+size = Vector3(0.6, 0.6, 0.6)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_a6s24"]
+render_priority = 0
+shader = ExtResource("3_504iq")
+shader_parameter/color = Color(0.9552265, 0.5366612, 0.11522848, 1)
+shader_parameter/emission_strength = 20.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_aef3e"]
+albedo_color = Color(0.41981313, 0.41981313, 0.4198131, 1)
+albedo_texture = ExtResource("3_65xlr")
+roughness_texture = ExtResource("6_uc5ns")
+roughness_texture_channel = 4
+normal_enabled = true
+normal_scale = 1.22
+normal_texture = ExtResource("5_wq3ue")
+heightmap_scale = 16.0
+heightmap_deep_parallax = true
+heightmap_min_layers = 8
+heightmap_max_layers = 32
+heightmap_texture = ExtResource("4_j0xsk")
+heightmap_flip_texture = true
+uv1_scale = Vector3(2.37, 2.37, 2.37)
+uv1_triplanar = true
+uv1_triplanar_sharpness = 8.876542
+texture_filter = 2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tkk1d"]
+albedo_color = Color(0.95518285, 0.45960486, 0.13681844, 1)
+albedo_texture = ExtResource("3_65xlr")
+roughness_texture = ExtResource("6_uc5ns")
+roughness_texture_channel = 4
+normal_enabled = true
+normal_texture = ExtResource("5_wq3ue")
+heightmap_enabled = true
+heightmap_scale = 1.0
+heightmap_texture = ExtResource("4_j0xsk")
+uv1_scale = Vector3(6.77, 6.77, 6.77)
+uv1_triplanar = true
+uv1_triplanar_sharpness = 8.876542
+
+[node name="Alarm" type="StaticBody3D" unique_id=47390072]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1194157889]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.19999999)
+shape = SubResource("BoxShape3D_fjt70")
+
+[node name="Rotator" type="Node3D" parent="." unique_id=926135060]
+
+[node name="AlarmMain" type="MeshInstance3D" parent="Rotator" unique_id=1749717666]
+material_override = ExtResource("1_504iq")
+mesh = ExtResource("2_k8q8g")
+
+[node name="Neon" type="MeshInstance3D" parent="Rotator" unique_id=1093934174]
+material_override = SubResource("ShaderMaterial_a6s24")
+mesh = ExtResource("12_fg5o3")
+
+[node name="L1" type="SpotLight3D" parent="Rotator/Neon" unique_id=1750900253]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -0.0155080035, 0, -0.14574683)
+light_color = Color(0.96720415, 0.7756019, 0.15498668, 1)
+spot_range = 11.415
+spot_attenuation = 1.15
+spot_angle = 40.66
+
+[node name="L2" type="SpotLight3D" parent="Rotator/Neon" unique_id=1641289672]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0.019234426, 0, -0.14574683)
+light_color = Color(0.96720415, 0.7756019, 0.15498668, 1)
+spot_range = 11.415
+spot_attenuation = 1.15
+spot_angle = 40.66
+
+[node name="Body" type="Node3D" parent="." unique_id=671260242]
+
+[node name="Body" type="MeshInstance3D" parent="Body" unique_id=862805272]
+material_override = SubResource("StandardMaterial3D_aef3e")
+mesh = ExtResource("7_xjwi3")
+
+[node name="Detail" type="MeshInstance3D" parent="Body" unique_id=184126670]
+material_override = SubResource("StandardMaterial3D_tkk1d")
+mesh = ExtResource("8_06asu")
+
+[node name="Glass" type="MeshInstance3D" parent="Body" unique_id=1741067822]
+material_override = ExtResource("9_2pevr")
+mesh = ExtResource("10_jntmf")
+
+[node name="Rotatio" type="MeshInstance3D" parent="Body" unique_id=43029848]
+material_override = ExtResource("13_g0ltq")
+mesh = ExtResource("14_sg6jq")
+
+[node name="Alarm" type="AudioStreamPlayer3D" parent="." unique_id=1794807536]
+stream = ExtResource("15_k8q8g")
+volume_db = -16.783
+max_db = -2.15
+max_distance = 28.64
+parameters/looping = false

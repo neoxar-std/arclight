@@ -29,40 +29,14 @@
 [ext_resource type="ArrayMesh" uid="uid://fkhva80k7t30" path="res://Meshes/Laser/tes.obj" id="18_aya38"]
 [ext_resource type="Material" uid="uid://cc5oobuw0lle8" path="res://Materials/Metal/Light/Metal030_1K-JPG.tres" id="18_t54jv"]
 [ext_resource type="ArrayMesh" uid="uid://444gb311lbae" path="res://Meshes/Laser/wat.obj" id="19_6hnro"]
+[ext_resource type="Texture2D" uid="uid://cdsmvufex3siq" path="res://Materials/Textures/Metal2/Metal030_1K-JPG_Color.jpg" id="22_10pal"]
 [ext_resource type="Shader" uid="uid://omrf4iqqlidj" path="res://Content/Laser.gdshader" id="30_0fjf0"]
-[ext_resource type="Material" uid="uid://biku5hpq2xd1d" path="res://Materials/Smoke.tres" id="31_psv3r"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_57qmd"]
-render_priority = 0
-shader = ExtResource("30_0fjf0")
-shader_parameter/apply_shape_deform = true
-shader_parameter/top_radius = 0.166000007885
-shader_parameter/bottom_radius = 0.0
-shader_parameter/center_radius = 1.0850000515375
-shader_parameter/center_position = 0.0
-shader_parameter/cylinder_height = 10.0
-shader_parameter/bottom_curve = 4.365
-shader_parameter/_vibrate_amplitude = 0.13
-shader_parameter/_vibrate_frequency = 10.0
-shader_parameter/_speed = 2.925
-shader_parameter/_scale = -0.325
-shader_parameter/color_inner = Color(1.3278385, 1.32158, 1.3256224, 0)
-shader_parameter/color_outer = Color(0.9842686, 0.5489669, 0.97018605, 0.6784314)
-shader_parameter/color_threshold = 0.5290000251275
-shader_parameter/flame_height = -0.01
-shader_parameter/flame_height_offset = -0.8
-shader_parameter/pattern_scale = 14.65
-shader_parameter/use_additional_texture = false
-shader_parameter/texture_scale = 1.125
-shader_parameter/texture_blend = 0.350000016625
-shader_parameter/outline_enabled = false
-shader_parameter/outline_color = Color(0, 0, 0, 1)
-shader_parameter/outline_thickness = 0.04
+[ext_resource type="Texture2D" uid="uid://blmis0hqps2se" path="res://Materials/Textures/Smoke/ggg.png" id="32_10pal"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_o1568"]
 albedo_color = Color(0.96999544, 0.6552306, 0.42917886, 1)
 albedo_texture_force_srgb = true
-metallic = 1.0
+metallic = 0.35
 metallic_texture = ExtResource("2_psv3r")
 metallic_texture_channel = 4
 roughness_texture = ExtResource("4_jtndc")
@@ -184,6 +158,19 @@ heightmap_scale = 1.0
 heightmap_texture = ExtResource("11_aya38")
 uv1_triplanar = true
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jtndc"]
+albedo_texture = ExtResource("22_10pal")
+metallic_texture = ExtResource("2_psv3r")
+metallic_texture_channel = 4
+roughness_texture = ExtResource("4_jtndc")
+roughness_texture_channel = 4
+normal_enabled = true
+normal_texture = ExtResource("3_10pal")
+heightmap_scale = 1.0
+heightmap_texture = ExtResource("1_0fjf0")
+uv1_triplanar = true
+uv1_triplanar_sharpness = 6.7271657
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_weoig"]
 albedo_color = Color(0.556953, 0.556953, 0.556953, 1)
 metallic = 1.0
@@ -260,8 +247,20 @@ heightmap_scale = 1.0
 heightmap_texture = ExtResource("11_aya38")
 uv1_triplanar = true
 
-[sub_resource type="SphereMesh" id="SphereMesh_g4v7s"]
-material = ExtResource("31_psv3r")
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nn8eb"]
+transparency = 1
+albedo_color = Color(0.66656864, 0.6665687, 0.6665685, 1)
+albedo_texture = ExtResource("32_10pal")
+uv1_scale = Vector3(3, 2, 2)
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="BoxMesh" id="BoxMesh_sj1qw"]
+material = SubResource("StandardMaterial3D_nn8eb")
+size = Vector3(2, 2, 0)
 
 [sub_resource type="Curve" id="Curve_ibmil"]
 _limits = [-200.0, 200.0, 0.0, 1.0]
@@ -271,6 +270,9 @@ point_count = 2
 [sub_resource type="Curve" id="Curve_57qmd"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_cxub2"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
 
 [sub_resource type="Gradient" id="Gradient_avnxn"]
 colors = PackedColorArray(0, 0, 0, 0, 1, 1, 1, 1)
@@ -307,16 +309,35 @@ rings = 12
 _data = [Vector2(0, 1), 0.0, -5.422741, 0, 0, Vector2(1, 0), -0.0937258, 0.0, 0, 0]
 point_count = 2
 
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_d0u6y"]
+frequency = 0.1308
+fractal_octaves = 10
+fractal_lacunarity = 3.05
+fractal_gain = 0.07
+fractal_ping_pong_strength = 4.15
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_57qmd"]
+noise = SubResource("FastNoiseLite_d0u6y")
+seamless = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_yf5fn"]
+render_priority = 0
+shader = ExtResource("30_0fjf0")
+shader_parameter/core_color = Color(1, 0.7205022, 0.9600423, 1)
+shader_parameter/edge_color = Color(0.7655055, 0, 0.07672834, 1)
+shader_parameter/noise_texture = SubResource("NoiseTexture2D_57qmd")
+shader_parameter/uv_pan = Vector2(0, -1.66)
+shader_parameter/uv_scale = Vector2(1, 0.675)
+shader_parameter/noise_density = 0.75600003591
+shader_parameter/cut_sharpness = 0.0010000000475
+shader_parameter/noise_intensity = 25.265
+shader_parameter/length_fade_power = 0.445
+shader_parameter/edge_fade_power = 1.315
+shader_parameter/top_down_brightness = 1.0
+shader_parameter/emission_energy = 13.99
+
 [node name="Laser" type="Node3D" unique_id=331255891]
 transform = Transform3D(1.405, 0, 0, 0, 1.405, 0, 0, 0, 1.405, 0, 0, 0)
-
-[node name="Shader" type="CSGSphere3D" parent="." unique_id=395532903]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 21.699999, 0)
-visible = false
-radius = 1.1
-radial_segments = 50
-rings = 46
-material = SubResource("ShaderMaterial_57qmd")
 
 [node name="LaserModel" type="Node3D" parent="." unique_id=1821842232]
 
@@ -371,7 +392,7 @@ mesh = ExtResource("10_uydqe")
 
 [node name="Ethetbetb" type="MeshInstance3D" parent="LaserModel" unique_id=111332275]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -93.99999, 0, 0)
-material_override = ExtResource("18_t54jv")
+material_override = SubResource("StandardMaterial3D_jtndc")
 mesh = ExtResource("11_ao6uy")
 
 [node name="F" type="MeshInstance3D" parent="LaserModel" unique_id=1508597471]
@@ -426,7 +447,7 @@ lifetime = 4.83
 one_shot = true
 explosiveness = 0.08
 randomness = 0.2
-mesh = SubResource("SphereMesh_g4v7s")
+mesh = SubResource("BoxMesh_sj1qw")
 direction = Vector3(0, 0, 0)
 spread = 24.0
 gravity = Vector3(0, 0, 0)
@@ -434,6 +455,7 @@ initial_velocity_max = 4.0
 linear_accel_curve = SubResource("Curve_ibmil")
 scale_amount_min = 0.0
 scale_amount_curve = SubResource("Curve_57qmd")
+color_ramp = SubResource("Gradient_cxub2")
 
 [node name="Holder2" type="Node3D" parent="SteamParticles" unique_id=1317218794]
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, 0, -1.5)
@@ -446,7 +468,7 @@ lifetime = 4.83
 one_shot = true
 explosiveness = 0.08
 randomness = 0.2
-mesh = SubResource("SphereMesh_g4v7s")
+mesh = SubResource("BoxMesh_sj1qw")
 direction = Vector3(0, 0, 0)
 spread = 24.0
 gravity = Vector3(0, 0, 0)
@@ -454,6 +476,7 @@ initial_velocity_max = 4.0
 linear_accel_curve = SubResource("Curve_ibmil")
 scale_amount_min = 0.0
 scale_amount_curve = SubResource("Curve_57qmd")
+color_ramp = SubResource("Gradient_cxub2")
 
 [node name="Holder3" type="Node3D" parent="SteamParticles" unique_id=1652673294]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 1.5, 0, 0)
@@ -466,7 +489,7 @@ lifetime = 4.83
 one_shot = true
 explosiveness = 0.08
 randomness = 0.2
-mesh = SubResource("SphereMesh_g4v7s")
+mesh = SubResource("BoxMesh_sj1qw")
 direction = Vector3(0, 0, 0)
 spread = 24.0
 gravity = Vector3(0, 0, 0)
@@ -474,6 +497,7 @@ initial_velocity_max = 4.0
 linear_accel_curve = SubResource("Curve_ibmil")
 scale_amount_min = 0.0
 scale_amount_curve = SubResource("Curve_57qmd")
+color_ramp = SubResource("Gradient_cxub2")
 
 [node name="Holder4" type="Node3D" parent="SteamParticles" unique_id=1518986030]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -1.4000001, 0, -9.685755e-08)
@@ -486,7 +510,7 @@ lifetime = 4.83
 one_shot = true
 explosiveness = 0.08
 randomness = 0.2
-mesh = SubResource("SphereMesh_g4v7s")
+mesh = SubResource("BoxMesh_sj1qw")
 direction = Vector3(0, 0, 0)
 spread = 24.0
 gravity = Vector3(0, 0, 0)
@@ -494,6 +518,7 @@ initial_velocity_max = 4.0
 linear_accel_curve = SubResource("Curve_ibmil")
 scale_amount_min = 0.0
 scale_amount_curve = SubResource("Curve_57qmd")
+color_ramp = SubResource("Gradient_cxub2")
 
 [node name="StartingParticles" type="Node3D" parent="." unique_id=609478964]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 23, 0)
@@ -515,3 +540,12 @@ angle_max = 152.0
 scale_amount_min = 11.05
 scale_amount_max = 11.05
 scale_amount_curve = SubResource("Curve_3gngh")
+
+[node name="Shader" type="CSGCylinder3D" parent="." unique_id=897872573]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 28.341305, 0)
+visible = false
+radius = 1.0043945
+height = 18.22754
+sides = 13
+cone = true
+material = SubResource("ShaderMaterial_yf5fn")

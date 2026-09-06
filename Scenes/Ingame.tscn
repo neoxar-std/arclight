@@ -1,22 +1,54 @@
-[gd_scene format=3 uid="uid://drsrasmqb3sgg"]
+[gd_scene format=4 uid="uid://drsrasmqb3sgg"]
 
 [ext_resource type="PackedScene" uid="uid://2oxdgu03lnbk" path="res://addons/character-controller/example/main/player.tscn" id="1_xc1it"]
 [ext_resource type="PackedScene" uid="uid://du5qc12ffea3d" path="res://Content/Laser.tscn" id="2_0u16y"]
 [ext_resource type="PackedScene" uid="uid://c67hjricfd8sc" path="res://Content/Button.tscn" id="5_c5a3t"]
 [ext_resource type="PackedScene" uid="uid://osjv8v3yimip" path="res://Content/Desk.tscn" id="6_522g6"]
+[ext_resource type="ArrayMesh" uid="uid://hiasg6f06lvb" path="res://Meshes/Chamber/Main.obj" id="8_lxlh7"]
+[ext_resource type="ArrayMesh" uid="uid://kcodkji7f782" path="res://Meshes/Chamber/ChamberDetails4.obj" id="9_u8dq5"]
+[ext_resource type="Texture2D" uid="uid://bge0ie2n3l1g4" path="res://Materials/Textures/Concrete1/Concrete034_2K-JPG_Color.jpg" id="9_v12qy"]
+[ext_resource type="Texture2D" uid="uid://dyt77uqd2epaw" path="res://Materials/Textures/Concrete1/Concrete034_2K-JPG_Displacement.jpg" id="10_sun48"]
 [ext_resource type="Shader" uid="uid://b5xeh4ub0rcx2" path="res://Scenes/Ingame.gdshader" id="11_38tfy"]
+[ext_resource type="ArrayMesh" uid="uid://rwcb26oaeqde" path="res://Meshes/Chamber/ChamberStuff.obj" id="11_lj3qd"]
 [ext_resource type="AudioStream" uid="uid://j10pmunjbooj" path="res://Content/reactor.mp3" id="11_lvn6m"]
+[ext_resource type="Texture2D" uid="uid://mkn1l8lchi0a" path="res://Materials/Textures/Concrete1/Concrete034_2K-JPG_NormalGL.jpg" id="11_ui50m"]
+[ext_resource type="ArrayMesh" uid="uid://d11hfu2s1743c" path="res://Meshes/Chamber/Details1.obj" id="12_5np2d"]
+[ext_resource type="Texture2D" uid="uid://dw37ygb1umpo2" path="res://Materials/Textures/Concrete1/Concrete034_2K-JPG_Roughness.jpg" id="12_13o6d"]
+[ext_resource type="Material" uid="uid://cc5oobuw0lle8" path="res://Materials/Metal/Light/Metal030_1K-JPG.tres" id="13_yobtl"]
+[ext_resource type="ArrayMesh" uid="uid://dfxb6rfn7mvap" path="res://Meshes/Chamber/Details2.obj" id="14_unnhd"]
+[ext_resource type="Material" uid="uid://c5t6tuuvwa1mh" path="res://Materials/Textures/Concrete1/Concrete034_2K-JPG.tres" id="16_707sx"]
+[ext_resource type="Texture2D" uid="uid://dxe66ghaf5s6i" path="res://Materials/Textures/Metal1/Metal049A_1K-JPG_Color.jpg" id="18_h8enb"]
+[ext_resource type="Texture2D" uid="uid://yt7nidv00i62" path="res://Materials/Textures/Metal1/Metal049A_1K-JPG_Displacement.jpg" id="19_gbvyf"]
+[ext_resource type="ArrayMesh" uid="uid://cnpjukcaml0an" path="res://Meshes/Chamber/Lights.obj" id="19_nyvdq"]
+[ext_resource type="Texture2D" uid="uid://cjf78x7wn0yb2" path="res://Materials/Textures/Metal2/Metal030_1K-JPG_Displacement.jpg" id="20_4l12f"]
+[ext_resource type="Texture2D" uid="uid://xbuh3lveg4x4" path="res://Materials/Textures/Metal1/Metal049A_1K-JPG_Metalness.jpg" id="20_wyy0n"]
+[ext_resource type="Texture2D" uid="uid://vy6y7i5kcnhd" path="res://Materials/Textures/Metal2/Metal030_1K-JPG_Metalness.jpg" id="21_8yvpg"]
+[ext_resource type="Texture2D" uid="uid://dnphmpx4ga8g3" path="res://Materials/Textures/Metal1/Metal049A_1K-JPG_NormalGL.jpg" id="21_u8dq5"]
+[ext_resource type="Texture2D" uid="uid://bpravndam4780" path="res://Materials/Textures/Metal2/Metal030_1K-JPG_NormalGL.jpg" id="22_jncyr"]
+[ext_resource type="Texture2D" uid="uid://ic3vtpj5wwl0" path="res://Materials/Textures/Metal1/Metal049A_1K-JPG_Roughness.jpg" id="22_lj3qd"]
+[ext_resource type="Texture2D" uid="uid://ce67wu6n8n6f8" path="res://Materials/Textures/Metal2/Metal030_1K-JPG_Roughness.jpg" id="23_6lmw8"]
+[ext_resource type="ArrayMesh" uid="uid://b2ur6nr3l1ebq" path="res://Meshes/Chamber/PipeHolders.obj" id="24_24bma"]
+[ext_resource type="ArrayMesh" uid="uid://b3exi4fpqrosd" path="res://Meshes/ReactorControl/Ceiling.obj" id="25_gxa5y"]
+[ext_resource type="ArrayMesh" uid="uid://b5qn8en1ac5hr" path="res://Meshes/ReactorControl/Floor.obj" id="28_0yrm8"]
+[ext_resource type="ArrayMesh" uid="uid://c3g3ndnhr6pvt" path="res://Meshes/ReactorControl/Screens.obj" id="29_wxeai"]
+[ext_resource type="ArrayMesh" uid="uid://de68x66sh406" path="res://Meshes/ReactorControl/Walls.obj" id="30_m827r"]
+[ext_resource type="PackedScene" uid="uid://cx120bblpc2rm" path="res://Content/Alarm.tscn" id="30_u8dq5"]
 
 [sub_resource type="Environment" id="Environment_g4v7s"]
 background_mode = 1
-background_energy_multiplier = 0.0
+background_color = Color(1, 1, 1, 1)
+background_energy_multiplier = 1.51
 ambient_light_source = 2
 ambient_light_color = Color(1, 1, 1, 1)
 ambient_light_energy = 0.25
+tonemap_mode = 4
+tonemap_exposure = 0.91
+tonemap_agx_white = 16.5
+tonemap_agx_contrast = 1.33
 ssr_max_steps = 32
-ssr_fade_in = 0.5045375
-ssr_fade_out = 0.9330329
-ssr_depth_tolerance = 14.01
+ssr_fade_in = 1.3314823
+ssr_fade_out = 1.6245047
+ssr_depth_tolerance = 5.61
 ssao_enabled = true
 ssao_radius = 0.75
 ssao_intensity = 2.57
@@ -27,6 +59,18 @@ glow_strength = 0.36
 glow_bloom = 0.19
 glow_hdr_threshold = 0.66
 volumetric_fog_density = 0.8331
+
+[sub_resource type="Compositor" id="Compositor_relkg"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_n56hh"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sjeo6"]
+bg_color = Color(1, 1, 1, 0.45490196)
+corner_radius_top_left = 32
+corner_radius_top_right = 32
+corner_radius_bottom_right = 32
+corner_radius_bottom_left = 32
+corner_detail = 12
 
 [sub_resource type="GDScript" id="GDScript_iit7f"]
 script/source = "extends Node3D
@@ -48,6 +92,8 @@ script/source = "extends Node3D
 @export var ReactorStarted: bool = false
 @export var ReactorStarting: bool = false
 @export var ReactorVisible: bool = false
+@export var TurbineStability: float = 100
+@export var PowerOutputGW: float = 0
 
 @onready var Reactor = $Reactor
 @onready var ReactorSound = $Reactor/Sound
@@ -57,9 +103,16 @@ script/source = "extends Node3D
 @onready var Laser3 = $Lasers/Laser3
 @onready var CameraEnvironment: Environment = Camera.environment
 
+var alarmsOn: bool = false
+var alarmsBrightness: float = 0
+var alarmsColor = Color(0, 0, 0)
+var alarmsRotSpeed: float = 0
+
 var ButtonGroupName = \"Buttons\"
 var ButtonDebounces = []
 var activeOSTs = []
+
+const max_power_gw = 3.5
 
 func quickCreateSound(parent: Node3D, resource: String, volumeDB: int):
 	var sound := AudioStreamPlayer.new()
@@ -86,8 +139,12 @@ func button_startup():
 	if ReactorStarting or ReactorStarted:
 		return
 	ReactorStarting = true
+	alarmsOn = true
 	clearAllActiveOSTs()
 	var StartupOST = playOST(\"res://Content/startup.mp3\", -12)
+	get_tree().create_timer(10).timeout.connect(func():
+		alarmsOn = false
+	)
 	get_tree().create_timer(27 - 7).timeout.connect(func(): 
 		for Laser in Lasers.get_children():
 			for Holder in Laser.get_node(\"SteamParticles\").get_children():
@@ -109,7 +166,11 @@ func button_startup():
 	await get_tree().create_timer(19.4).timeout
 	quickCreateSound(Reactor, \"res://Content/exp1.mp3\", -2)
 	quickCreateSound(Reactor, \"res://Content/exp3.mp3\", 0)
-	get_tree().create_timer(20).timeout.connect(func(): get_tree().create_tween().tween_property(StartupOST, \"volume_db\", -120, 20))
+	# quickCreateSound(Reactor, \"res://Content/yes.mp3\", 30)
+	get_tree().create_timer(20).timeout.connect(func(): 
+		if StartupOST: 
+			get_tree().create_tween().tween_property(StartupOST, \"volume_db\", -120, 20)
+	)
 	var NewTween = get_tree().create_tween()
 	CameraEnvironment.tonemap_exposure = 500
 	NewTween.tween_property(CameraEnvironment, \"tonemap_exposure\", 1, 5).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
@@ -178,6 +239,45 @@ func updateReactorVisibility():
 
 func updateViewportScreens():
 	MainControlRoomScreenViewport.get_node(\"Control\").get_node(\"Label\").text = \"Temp: \" + str(ReactorTemp)
+	MainControlRoomScreenViewport.get_node(\"Control\").get_node(\"Label3\").text = \"Power Generation: \" + str(PowerOutputGW) + \" GW\"
+	
+func stepAlarms(delta):
+	var target_brightness = 1.0 if alarmsOn else 0.0
+	var target_color = Color.YELLOW if alarmsOn else Color.BLACK
+
+	alarmsBrightness = lerp(alarmsBrightness, target_brightness, 1.1 * delta)
+	alarmsColor = alarmsColor.lerp(target_color, 1.1 * delta)
+	alarmsRotSpeed = lerp(alarmsRotSpeed, target_brightness, 1.2 * delta) # It doesn't matter
+	
+	for Alarm in $Alarms.get_children():
+		var sound = Alarm.get_node(\"Alarm\")
+		var rotator = Alarm.get_node(\"Rotator\")
+		if sound and rotator:
+			if sound.playing != alarmsOn:
+				sound.playing = alarmsOn
+			rotator.rotate(Vector3(0, 0, 1), deg_to_rad(alarmsRotSpeed * 4))
+			
+			var neon = rotator.get_node(\"Neon\")
+			if neon:
+				var light1 = neon.get_node(\"L1\")
+				var light2 = neon.get_node(\"L2\")
+				if light1 and light2:
+					light1.light_energy = alarmsBrightness
+					light2.light_energy = alarmsBrightness
+				
+				var material: ShaderMaterial = neon.material_override
+				if material:
+					material.set_shader_parameter(\"color\", alarmsColor)
+					
+func PowerGenerationStep(delta):
+	var stability = clamp(TurbineStability / 100.0, 0.0, 1.0)
+	var temp_factor = clamp(ReactorTemp / 12000, 0.0, 1.0)
+	var target_power = (max_power_gw * temp_factor) * stability
+	PowerOutputGW = lerp(
+		PowerOutputGW,
+		target_power,
+		5.0 * delta
+	)
 
 func _process(delta: float) -> void:
 	if ReactorStarted:
@@ -196,8 +296,13 @@ func _process(delta: float) -> void:
 				Laser3Pressure += (clamp(abs(20 - Laser3Power) / 10, 0, 75) * 25) * delta
 		ReactorTemp -= ((Coolant1Power + Coolant2Power + Coolant3Power) / 80) * delta
 		Reactor.rotate(Vector3(0, 1, 0), deg_to_rad(clamp((ReactorTemp / 12000) * 30, 1, 30)));
+		
+	PowerGenerationStep(delta)
 	updateReactorVisibility()
-	updateViewportScreens()
+	stepAlarms(delta)
+	
+	updateViewportScreens() # Last!
+	
 	pass
 "
 
@@ -224,12 +329,218 @@ emission_enabled = true
 emission = Color(1, 1, 1, 1)
 emission_energy_multiplier = 11.8
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1l6sa"]
+albedo_color = Color(0.97396487, 0.7950405, 0.5933102, 1)
+albedo_texture = ExtResource("9_v12qy")
+roughness_texture = ExtResource("12_13o6d")
+roughness_texture_channel = 4
+normal_enabled = true
+normal_texture = ExtResource("11_ui50m")
+heightmap_enabled = true
+heightmap_scale = 1.0
+heightmap_texture = ExtResource("10_sun48")
+uv1_scale = Vector3(0.23, 0.23, 0.23)
+uv1_triplanar = true
+uv1_triplanar_sharpness = 8.876542
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bhu67"]
+albedo_color = Color(0.5931336, 0.59313357, 0.59313357, 1)
+albedo_texture = ExtResource("9_v12qy")
+roughness_texture = ExtResource("12_13o6d")
+roughness_texture_channel = 4
+normal_enabled = true
+normal_texture = ExtResource("11_ui50m")
+heightmap_enabled = true
+heightmap_scale = 1.0
+heightmap_texture = ExtResource("10_sun48")
+uv1_scale = Vector3(0.23, 0.23, 0.23)
+uv1_triplanar = true
+uv1_triplanar_sharpness = 8.876542
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_u7aui"]
+noise_type = 2
+seed = 309
+frequency = 0.0001
+fractal_octaves = 7
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_l4kd7"]
+width = 1028
+height = 1028
+noise = SubResource("FastNoiseLite_u7aui")
+seamless = true
+in_3d_space = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_d7lrx"]
+albedo_color = Color(0.8658573, 0.60945684, 0.35469505, 1)
+albedo_texture = ExtResource("18_h8enb")
+metallic = 0.67
+metallic_specular = 0.44
+metallic_texture = ExtResource("20_wyy0n")
+metallic_texture_channel = 4
+roughness_texture = SubResource("NoiseTexture2D_l4kd7")
+roughness_texture_channel = 4
+normal_enabled = true
+normal_scale = 0.21
+normal_texture = SubResource("NoiseTexture2D_l4kd7")
+heightmap_scale = 1.0
+heightmap_texture = ExtResource("19_gbvyf")
+uv1_triplanar = true
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_15axq"]
+_surfaces = [{
+"aabb": AABB(-15.233327, -59.75347, -15.093233, 30.186466, 22.3695, 30.186466),
+"format": 34896613377,
+"index_count": 642,
+"index_data": PackedByteArray("AAABAAIAAgABAAMAAAAEAAEAAgADAAUABgAEAAAABQADAAcABQAHAAgACAAHAAkABgAKAAQACAAJAAsADAAKAAYACwAJAA0ADAAOAAoADgAPAAoAEAAOAAwACgAPABEAEgAQAAwADwATABEAFAAQABIAEQATABUAFgAUABIAEwAXABUAFwAUABYAFQAXABYAFgAYABUAGQAYABYAGQAaABgAGwAaABkAGwAcABoAHQAcABsAHQAeABwAHwAeAB0AHwAgAB4AIQAgAB8AIQAiACAAIwAiACEAIwAkACIAJAAlACIAJgAkACMAIgAlACcAKAAmACMAJQApACcAKQAmACgAJwApACgAKAAqACcAKwAqACgAKwAsACoALQAsACsALQAuACwALwAuAC0ALwAwAC4AMAAxAC4AMgAwAC8ALgAxADMANAAyAC8AMQA1ADMANQAyADQAMwA1ADQANAA2ADMANwA2ADQANwA4ADYAOQA4ADcAOQA6ADgAOwA6ADkAOwA8ADoAPAA9ADoAPgA8ADsAOgA9AA0ACwA+ADsAPQA/AA0APwA+AAsADQA/AAsAQABBAEIAQgBBAEMAQABEAEEAQgBDAEUARgBEAEAARQBDAEcARQBHAEgASABHAEkARgBKAEQASABJAEsATABKAEYASwBJAE0ATABOAEoATgBPAEoAUABOAEwASgBPAFEAUgBQAEwATwBTAFEAVABQAFIAUQBTAFUAVgBUAFIAUwBXAFUAVwBUAFYAVQBXAFYAVgBYAFUAWQBYAFYAWQBaAFgAWwBaAFkAWwBcAFoAXQBcAFsAXQBeAFwAXwBeAF0AXwBgAF4AYQBgAF8AYQBiAGAAYwBiAGEAYwBkAGIAZABlAGIAZgBkAGMAYgBlAGcAaABmAGMAZQBpAGcAaQBmAGgAZwBpAGgAaABqAGcAawBqAGgAawBsAGoAbQBsAGsAbQBuAGwAbwBuAG0AbwBwAG4AcABxAG4AcgBwAG8AbgBxAHMAdAByAG8AcQB1AHMAdQByAHQAcwB1AHQAdAB2AHMAdwB2AHQAdwB4AHYAeQB4AHcAeQB6AHgAewB6AHkAewB8AHoAfAB9AHoAfgB8AHsAegB9AE0ASwB+AHsAfQB/AE0AfwB+AEsATQB/AEsAgACBAIIAggCBAIMAgACEAIEAggCDAIUAhgCEAIAAhQCDAIcAhQCHAIgAiACHAIkAhgCKAIQAiACJAIsAjACKAIYAiwCJAI0AjACOAIoAjgCPAIoAkACOAIwAigCPAJEAkgCQAIwAjwCTAJEAlACQAJIAkQCTAJUAlgCUAJIAkwCXAJUAlwCUAJYAlQCXAJYAlgCYAJUAmQCYAJYAmQCaAJgAmwCaAJkAmwCcAJoAnQCcAJsAnQCeAJwAnwCeAJ0AnwCgAJ4AoQCgAJ8AoQCiAKAAowCiAKEAowCkAKIApAClAKIAogClAKYApwCkAKMAqACnAKMAqQCnAKgAqACqAKYAqwCqAKgAqwCsAKoArQCsAKsArQCuAKwArwCuAK0ArwCwAK4AsACxAK4AsgCwAK8ArgCxALMAtACyAK8AsQC1ALMAtQCyALQAswC1ALQAtAC2ALMAtwC2ALQAtwC4ALYAuQC4ALcAuQC6ALgAuwC6ALkAuwC8ALoAvAC9ALoAvgC8ALsAugC9AI0AiwC+ALsAvQC/AI0AvwC+AIsAjQC/AIsA"),
+"name": "Cube.096",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 192,
+"vertex_data": PackedByteArray("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")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_ysm5i"]
+_surfaces = [{
+"aabb": AABB(-15.233327, -59.75347, -15.093233, 30.186466, 22.3695, 30.186466),
+"attribute_data": PackedByteArray("T05LaDBOOGgxTgZpEk7xaGpOxmaKTtVmjU5waG5OXWhwTi9pUE4aaalO42bJTvFmzE6VaK1OgmiuTlhpj05DaelO/2YITw1nFE49VvVNVFYxTvhWEk4NV1JOEFYzTidWcE7PVlBO5FaQTuNVcU75Va5OplaPTrtWMU74VhJODVdPTrRXME7GV4pOKllqTjhZcE7PVlBO5FaNTo9Xbk6hV8lODVmpThxZrk6mVo9Ou1bMTmpXrU58VwhP8VjpTv9Yik4qWWpOOFkATxZc4E4cXMlODVmpThxZQE8KXCBPEFwIT/FY6U7/WIBP/1tgTwVcZEycU01MxFMUTj1W9U1UVpNMTVN8THRTUk4QVjNOJ1bBTP1SqkwlU5BO41VxTvlVw0cGUrhHM1JkTJxTTUzEU9lHrVHOR9lRk0xNU3xMdFPvR1RR5EeAUcFM/VKqTCVTZExibE1MOmzDR/htuEfMbZNMsmx8TIps2UdRbs5HJW7BTAFtqkzabO9Hqm7kR35uFE7BafVNqmlkTGJsTUw6bFJO7mkzTthpk0yybHxMimyQThxqcU4FasFMAW2qTNpsMU4GaRJO8WgUTsFp9U2qaXBOL2lQThppUk7uaTNO2GmuTlhpj05DaZBOHGpxTgVqAE/oY+BO4mOKTtVmak7GZkBP9GMgT+5jyU7xZqlO42aAT/9jYE/6YwhPDWfpTv9mrDh3aM44ZWgKN2hjMTdjY2c4m2iJOIlovTZxY+Q2bWMiOL9oRDitaHA2e2OXNnZjBzvgahw7wGqsOHdozjhlaN46H2vyOgBrZzibaIk4iWi0Ol9ryTo/ayI4v2hEOK1ofUAebYFA9mwHO+BqHDvAanZAbm16QEZt3jofa/I6AGtvQL1tckCVbbQ6X2vJOj9rCjeXXDE3nFysOIhXzjiaV702jVzkNpJcZzhkV4k4dldwNoNclzaIXCI4QFdEOFJXBzseVRw7PlV9QOBSgUAIU94631TyOv9UdkCRUnpAuFK0Op9UyTq/VG9AQVJyQGlSrDiIV844mlcHOx5VHDs+VWc4ZFeJOHZX3jrfVPI6/1QiOEBXRDhSV7Q6n1TJOr9U3ED6UtlA2VKBQAhTfUDgUrhHM1JnRxVSXkc5UsNHBlLVQKpS0kCJUnpAuFJ2QJFSzkfZUXxHvFFzR+BR2UetUZJHY1GJR4hR70dUUW9AQVLLQDlS5EeAUc5AWlJyQGlSdDbZXJM23VxwNoNclzaIXHA2e2OTNiFjdDYlY5c2dmPBNuNc4DbnXL02jVzkNpJcvTZxY+A2F2PBNhtj5DZtYw437VwtN/FcCjeXXDE3nFwKN2hjLTcNYw43EWMxN2NjiUd3bpJHm27kR35u70eqbnJAlW3LQMVtzkCkbW9AvW1zRx5ufEdCbs5HJW7ZR1FuekBGbdJAdW3VQFRtdkBubV5HxW1nR+ltuEfMbcNH+G2BQPZs2UAlbdxABG19QB5tfU+cY2NPmGOAT/9jYE/6Yz1PkWMjT4xjQE/0YyBP7mP9ToVj406AYwBP6GPgTuJj405+XP1OeVzgThxcAE8WXCNPclw9T25cIE8QXEBPClxjT2dcfU9iXGBPBVyAT/9b407/X+NOflzgTv9f4E4cXP1OeVz9Tv9fAE8WXABP/18jT/9fI09yXCBP/18gTxBcPU9uXD1P/19ATwpcQE//X2NP/19jT2dcYE//X2BPBVx9T2JcfU//X4BP/1uAT/9f406AY+NO/1/gTuJj4E7/X/1O/1/9ToVjAE//XwBP6GMjT4xjI0//XyBP7mMgT/9fPU//Xz1PkWNAT/9fQE/0Y2NPmGNjT/9fYE/6Y2BP/199T/9ffU+cY4BP/1+AT/9j"),
+"format": 34896613399,
+"index_count": 642,
+"index_data": PackedByteArray("AAABAAIAAgABAAMAAAAEAAEABQAEAAAABgAHAAgACAAHAAkABgAKAAcACwAKAAYADAANAA4ADgANAA8ADAAQAA0AEQAQAAwAEgATABQAFAATABUAFgAXABgAGAAXABkAGgAbABwAHAAbAB0AHgAfACAAIAAfACEAIAAhACIAIgAhACMAJAAlACYAJgAlACcAJgAnACgAKAAnACkAKgArACwALAArAC0ALAAtAC4ALgAtAC8AMAAxADIAMgAxADMANAA1ADYANgA1ADcAOAA5ADoAOgA5ADsAPAA9AD4APgA9AD8AQABBAEIAQgBBAEMARABFAEYARgBFAEcASABJAEoASgBJAEsATABNAE4ATgBNAE8AUABRAFIAUgBRAFMAVABVAFYAVgBVAFcAWABZAFoAWgBZAFsAXABdAF4AXgBdAF8AYABhAGIAYgBhAGMAZABlAGYAZgBlAGcAaABpAGoAagBpAGsAbABtAG4AbgBtAG8AcABxAHIAcgBxAHMAdAB1AHYAdgB1AHcAeAB5AHoAegB5AHsAfAB9AH4AfgB9AH8AgACBAIIAggCBAIMAhACFAIYAhgCFAIcAiACJAIoAigCJAIsAjACNAI4AjgCNAI8AkACRAJIAkgCRAJMAlACVAJYAlgCVAJcAmACZAJoAmgCZAJsAnACdAJ4AngCdAJ8AoAChAKIAogChAKMApAClAKYApgClAKcAqACpAKoAqgCpAKsArACtAK4ArgCtAK8AsACxALIAsgCxALMAtAC1ALYAtgC1ALcAuAC5ALoAugC5ALsAvAC9AL4AvgC9AL8AwADBAMIAwgDBAMMAxADFAMYAxgDFAMcAyADJAMoAygDJAMsAzADNAM4AzgDNAM8A0ADMAM4AzQDRAM8A0gDMANAAzwDRANMA0QDSANMA0wDSANAA1ADVANYA1gDVANcA2ADUANYA1QDZANcA2gDUANgA1wDZANsA2QDaANsA2wDaANgA3ADdAN4A3wDcAN4A4ADcAN8A3gDdAOEA3QDiAOEA4QDiAOMA5ADlAOYA5gDlAOcA6ADkAOYA5QDpAOcA6gDkAOgA5wDpAOsA6QDqAOsA6wDqAOgA7ADtAO4A7gDtAO8A8ADsAO4A7QDxAO8A8gDsAPAA7wDxAPMA8QDyAPMA8wDyAPAA9AD1APYA9gD1APcA+AD0APYA9QD5APcA+gD0APgA9wD5APsA+QD6APsA+wD6APgA/AD9AP4A/gD9AP8AAAH8AP4A/QABAf8AAgH8AAAB/wABAQMBAQECAQMBAwECAQABBAEFAQYBBgEFAQcBCAEEAQYBBQEJAQcBCgEEAQgBBwEJAQsBCQEKAQsBCwEKAQgBDAENAQ4BDgENAQ8BEAEMAQ4BDQERAQ8BEgEMARABDwERARMBEQESARMBEwESARABFAEVARYBFgEVARcBGAEZARoBGgEZARsBHAEdAR4BHgEdAR8BIAEhASIBIgEhASMBJAElASYBJgElAScBKAEpASoBKgEpASsBLAEtAS4BLgEtAS8BMAExATIBMgExATMBNAE1ATYBNgE1ATcBOAE5AToBOgE5ATsBPAE9AT4BPgE9AT8BQAFBAUIBQgFBAUMBRAFFAUYBRgFFAUcBSAFJAUoBSgFJAUsBTAFNAU4BTgFNAU8BUAFRAVIBUgFRAVMBVAFVAVYBVgFVAVcBWAFZAVoBWgFZAVsB"),
+"name": "Cube.096",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 348,
+"vertex_data": PackedByteArray("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")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_15axq")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wyy0n"]
+emission_enabled = true
+emission = Color(1, 1, 1, 1)
+emission_energy_multiplier = 16.0
+
+[sub_resource type="Gradient" id="Gradient_q5gs5"]
+colors = PackedColorArray(0.76240367, 0.76240367, 0.76240367, 1, 1, 1, 1, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_uwman"]
+seed = 40
+frequency = 0.0162
+fractal_octaves = 10
+fractal_lacunarity = 3.525
+fractal_gain = 0.7
+fractal_weighted_strength = 1.0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_26f8q"]
+noise = SubResource("FastNoiseLite_uwman")
+color_ramp = SubResource("Gradient_q5gs5")
+seamless = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yulqq"]
+albedo_texture = SubResource("NoiseTexture2D_26f8q")
+metallic = 0.61
+metallic_specular = 0.38
+metallic_texture = ExtResource("21_8yvpg")
+metallic_texture_channel = 4
+roughness_texture = ExtResource("23_6lmw8")
+roughness_texture_channel = 4
+normal_enabled = true
+normal_texture = ExtResource("22_jncyr")
+heightmap_scale = 1.0
+heightmap_texture = ExtResource("20_4l12f")
+uv1_scale = Vector3(0.225, 0.225, 0.225)
+uv1_triplanar = true
+uv1_triplanar_sharpness = 6.7271657
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_jbrlp"]
+load_path = "res://.godot/imported/Concrete034_2K-JPG_Color.jpg-80f89abd61d0c2729867ff368ece274b.s3tc.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_3o274"]
+load_path = "res://.godot/imported/Concrete034_2K-JPG_Displacement.jpg-006237f5595f14c21cf168de80377291.s3tc.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_jah0r"]
+load_path = "res://.godot/imported/Concrete034_2K-JPG_NormalGL.jpg-89a198a13bdab637ce3060ab2af0ea62.s3tc.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_h1qu3"]
+load_path = "res://.godot/imported/Concrete034_2K-JPG_Roughness.jpg-e9f4b63115624d566787d72d53212358.s3tc.ctex"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_v57uv"]
+cull_mode = 2
+albedo_color = Color(0.6706895, 0.6706895, 0.6706895, 1)
+albedo_texture = SubResource("CompressedTexture2D_jbrlp")
+roughness_texture = SubResource("CompressedTexture2D_h1qu3")
+roughness_texture_channel = 4
+normal_enabled = true
+normal_texture = SubResource("CompressedTexture2D_jah0r")
+heightmap_enabled = true
+heightmap_scale = 1.0
+heightmap_texture = SubResource("CompressedTexture2D_3o274")
+uv1_scale = Vector3(0.23, 0.23, 0.23)
+uv1_triplanar = true
+uv1_triplanar_sharpness = 8.876542
+
+[sub_resource type="Gradient" id="Gradient_drakd"]
+offsets = PackedFloat32Array(0.010928961, 1)
+colors = PackedColorArray(0.8474744, 0.84747446, 0.84747446, 1, 1, 1, 1, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_m2wbo"]
+noise_type = 3
+frequency = 0.0085
+fractal_type = 2
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_gpq3i"]
+width = 2048
+height = 2048
+noise = SubResource("FastNoiseLite_m2wbo")
+color_ramp = SubResource("Gradient_drakd")
+seamless = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qwp3q"]
+cull_mode = 2
+albedo_color = Color(0.5409905, 0.5409905, 0.5409905, 1)
+albedo_texture = SubResource("NoiseTexture2D_gpq3i")
+metallic = 0.67
+metallic_specular = 0.44
+metallic_texture = ExtResource("20_wyy0n")
+metallic_texture_channel = 4
+roughness = 0.74
+roughness_texture = ExtResource("22_lj3qd")
+roughness_texture_channel = 4
+normal_enabled = true
+normal_texture = ExtResource("21_u8dq5")
+heightmap_scale = 1.0
+heightmap_texture = ExtResource("19_gbvyf")
+uv1_triplanar = true
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_u8dq5"]
+size = Vector3(32.126244, 0.99999976, 46.81385)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_w0mu1"]
+cull_mode = 2
+albedo_texture = ExtResource("9_v12qy")
+roughness_texture = ExtResource("12_13o6d")
+roughness_texture_channel = 4
+normal_enabled = true
+normal_texture = ExtResource("11_ui50m")
+heightmap_enabled = true
+heightmap_scale = 1.0
+heightmap_texture = ExtResource("10_sun48")
+uv1_scale = Vector3(0.23, 0.23, 0.23)
+uv1_triplanar = true
+uv1_triplanar_sharpness = 8.876542
+
 [sub_resource type="ViewportTexture" id="ViewportTexture_n56hh"]
 viewport_path = NodePath("Test/SubViewport")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_c5a3t"]
 resource_local_to_scene = true
 albedo_texture = SubResource("ViewportTexture_n56hh")
+emission_enabled = true
+emission = Color(1, 1, 1, 1)
+emission_energy_multiplier = 5.89
+emission_operator = 1
+emission_texture = SubResource("ViewportTexture_n56hh")
 uv1_scale = Vector3(1, -1, -1)
 
 [sub_resource type="SystemFont" id="SystemFont_yf5fn"]
@@ -238,10 +549,28 @@ uv1_scale = Vector3(1, -1, -1)
 font = SubResource("SystemFont_yf5fn")
 font_size = 34
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g4v7s"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6vi4j"]
+cull_mode = 2
+albedo_color = Color(0.8047426, 0.80474263, 0.8047426, 1)
+albedo_texture = ExtResource("9_v12qy")
+roughness_texture = ExtResource("12_13o6d")
+roughness_texture_channel = 4
+normal_enabled = true
+normal_texture = ExtResource("11_ui50m")
+heightmap_enabled = true
+heightmap_scale = 1.0
+heightmap_texture = ExtResource("10_sun48")
+uv1_scale = Vector3(0.23, 0.23, 0.23)
+uv1_triplanar = true
+uv1_triplanar_sharpness = 8.876542
+
 [node name="Ingame" type="Node3D" unique_id=1744033920]
 
 [node name="Player" parent="." unique_id=92291307 instance=ExtResource("1_xc1it")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 49, -3, 0)
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 52, 1, 0)
 floor_max_angle = 1.553343
 
 [node name="Head" parent="Player" index="8"]
@@ -252,7 +581,35 @@ gizmo_extents = 0.45
 
 [node name="Camera3D" type="Camera3D" parent="Player/Head/FirstPersonCameraReference" index="0" unique_id=663682698]
 environment = SubResource("Environment_g4v7s")
+compositor = SubResource("Compositor_relkg")
 fov = 85.4
+
+[node name="Control" type="Control" parent="Player/Head/FirstPersonCameraReference/Camera3D" unique_id=1238121090]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+
+[node name="Panel" type="Panel" parent="Player/Head/FirstPersonCameraReference/Camera3D/Control" unique_id=2048837073]
+material = SubResource("CanvasItemMaterial_n56hh")
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -1.5
+offset_top = -1.5
+offset_right = 1.5
+offset_bottom = 1.5
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+mouse_behavior_recursive = 1
+theme_override_styles/panel = SubResource("StyleBoxFlat_sjeo6")
 
 [node name="Player Audios" parent="Player" index="9"]
 transform = Transform3D(0.97020805, -0.24153583, 0.018886998, 0.22444497, 0.86672634, -0.44543228, 0.09121801, 0.4364011, 0.8951164, 0, 0, 0)
@@ -304,19 +661,71 @@ omni_range = 50.0
 omni_attenuation = 0.343
 omni_shadow_mode = 0
 
-[node name="hjisdfvg" type="CSGBox3D" parent="." unique_id=568150387]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 51, -6, 0)
-use_collision = true
-size = Vector3(17, 1, 29)
+[node name="Chamber" type="Node3D" parent="Game" unique_id=1985711442]
+
+[node name="ChamberDetails4" type="MeshInstance3D" parent="Game/Chamber" unique_id=480249154]
+material_override = SubResource("StandardMaterial3D_1l6sa")
+mesh = ExtResource("9_u8dq5")
+
+[node name="ChamberStuff" type="MeshInstance3D" parent="Game/Chamber" unique_id=528997890]
+material_override = ExtResource("16_707sx")
+mesh = ExtResource("11_lj3qd")
+
+[node name="Details1" type="MeshInstance3D" parent="Game/Chamber" unique_id=1316416289]
+material_override = SubResource("StandardMaterial3D_bhu67")
+mesh = ExtResource("12_5np2d")
+
+[node name="Details2" type="MeshInstance3D" parent="Game/Chamber" unique_id=1758780646]
+material_override = ExtResource("13_yobtl")
+mesh = ExtResource("14_unnhd")
+
+[node name="Details3" type="MeshInstance3D" parent="Game/Chamber" unique_id=1323101772]
+material_override = SubResource("StandardMaterial3D_d7lrx")
+mesh = SubResource("ArrayMesh_ysm5i")
+
+[node name="Lights" type="MeshInstance3D" parent="Game/Chamber" unique_id=2115222461]
+material_override = SubResource("StandardMaterial3D_wyy0n")
+mesh = ExtResource("19_nyvdq")
+
+[node name="PipeHolders" type="MeshInstance3D" parent="Game/Chamber" unique_id=1829753719]
+material_override = SubResource("StandardMaterial3D_yulqq")
+mesh = ExtResource("24_24bma")
+
+[node name="ControlRoom" type="Node3D" parent="Game" unique_id=1903872104]
+
+[node name="Ceiling" type="MeshInstance3D" parent="Game/ControlRoom" unique_id=237294166]
+material_override = SubResource("StandardMaterial3D_v57uv")
+mesh = ExtResource("25_gxa5y")
+
+[node name="Floor" type="MeshInstance3D" parent="Game/ControlRoom" unique_id=536171216]
+material_override = SubResource("StandardMaterial3D_qwp3q")
+mesh = ExtResource("28_0yrm8")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Game/ControlRoom/Floor" unique_id=502659780]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 54.671497, -3.5616298, -1.9073486e-06)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Game/ControlRoom/Floor/StaticBody3D" unique_id=1683899223]
+shape = SubResource("BoxShape3D_u8dq5")
+
+[node name="Screens" type="MeshInstance3D" parent="Game/ControlRoom" unique_id=195571984]
+mesh = ExtResource("29_wxeai")
+
+[node name="Walls" type="MeshInstance3D" parent="Game/ControlRoom" unique_id=631294837]
+material_override = SubResource("StandardMaterial3D_w0mu1")
+mesh = ExtResource("30_m827r")
+
+[node name="Alarms" type="Node3D" parent="Game" unique_id=459385352]
+
+[node name="Alarm" parent="Game/Alarms" unique_id=47390072 instance=ExtResource("30_u8dq5")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 47, 0.79999995, 4)
+
+[node name="Alarm2" parent="Game/Alarms" unique_id=999138616 instance=ExtResource("30_u8dq5")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 47, 0.79999995, 2)
 
 [node name="Test" type="CSGBox3D" parent="." unique_id=1440505237]
-transform = Transform3D(-4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0, 1, 46, -3.5, -0.6)
-size = Vector3(1.1, 0.1, 2.2)
+transform = Transform3D(-0.2723929, 0.9621716, -0.0052816686, -0.9621861, -0.27238926, 0.001415219, -7.698619e-05, 0.0054674437, 0.99998504, 44.027466, 11.272926, 0.40054333)
+size = Vector3(7.5, 0.1, 16.4)
 material = SubResource("StandardMaterial3D_c5a3t")
-
-[node name="SubViewportContainer" type="SubViewportContainer" parent="Test" unique_id=449536471]
-offset_right = 40.0
-offset_bottom = 40.0
 
 [node name="SubViewport" type="SubViewport" parent="Test" unique_id=191051565]
 screen_space_aa = 1
@@ -356,14 +765,27 @@ offset_bottom = 155.0
 text = "uhhh some variable"
 label_settings = SubResource("LabelSettings_g4v7s")
 
+[node name="Panel" type="Panel" parent="Test/SubViewport" unique_id=287142246]
+z_index = -8
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_g4v7s")
+
 [node name="buttonTest" parent="." unique_id=796667830 instance=ExtResource("5_c5a3t")]
-transform = Transform3D(0.9911697, 0.1325996, 0, -0.1325996, 0.9911697, 0, 0, 0, 1, 47.066074, -4.3207393, 3.9492333)
+transform = Transform3D(0.9911697, 0.1325996, 0, -0.1325996, 0.9911697, 0, 0, 0, 1, 48.29791, -1.2587029, 5.349233)
 
 [node name="buttonTest2" parent="." unique_id=561695665 instance=ExtResource("5_c5a3t")]
-transform = Transform3D(0.9912155, 0.13225639, 0, -0.13225639, 0.9912155, 0, 0, 0, 1, 46.571114, -4.242774, 3.9685504)
+transform = Transform3D(0.9912155, 0.13225639, 0, -0.13225639, 0.9912155, 0, 0, 0, 1, 47.802948, -1.1807381, 5.3685503)
 
 [node name="Desk" parent="." unique_id=61415885 instance=ExtResource("6_522g6")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 46.8, -5, 1)
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 48.031834, -2.2379642, 1)
+
+[node name="Main" type="MeshInstance3D" parent="." unique_id=966562989]
+material_override = SubResource("StandardMaterial3D_6vi4j")
+mesh = ExtResource("8_lxlh7")
 
 [editable path="Player"]
 [editable path="Game/Lasers/Laser1"]

@@ -1,5 +1,7 @@
 [gd_resource type="StandardMaterial3D" format=3 uid="uid://biku5hpq2xd1d"]
 
+[sub_resource type="ImageTexture" id="ImageTexture_7qyoo"]
+
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_m5hop"]
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_w2jml"]
@@ -10,14 +12,14 @@ noise = SubResource("FastNoiseLite_m5hop")
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_362k0"]
 
 [resource]
+transparency = 1
 diffuse_mode = 1
 specular_mode = 2
-albedo_color = Color(0.556953, 0.556953, 0.556953, 1)
-roughness = 0.0
+albedo_texture = SubResource("ImageTexture_7qyoo")
+metallic_specular = 0.0
 emission = Color(1, 1, 1, 1)
 emission_energy_multiplier = 23.0
 clearcoat_roughness = 1.0
-heightmap_enabled = true
 heightmap_scale = 4.175
 heightmap_deep_parallax = true
 heightmap_min_layers = 8
@@ -31,3 +33,8 @@ refraction_scale = 0.58
 refraction_texture = SubResource("NoiseTexture2D_relkg")
 refraction_texture_channel = 4
 disable_receive_shadows = true
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
